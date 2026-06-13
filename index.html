@@ -176,7 +176,7 @@
         .qr-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin: 0 auto 15px auto; display: none; width: fit-content; }
         #qr-image { width: 160px; height: 160px; }
 
-        /* --- 8. GALLERY (Udah di-set jadi POTRAIT) --- */
+        /* --- 8. GALLERY --- */
         #gallery {
             position: relative;
             padding: 0; 
@@ -191,7 +191,6 @@
             background: transparent; 
         }
         .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
-        /* Ubah height jadi 280px biar fotonya memanjang ke bawah */
         .gallery-item { width: 100%; height: 280px; background-color: #ddd; background-size: cover; background-position: center; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
 
         /* --- 9. LOVE STORY --- */
@@ -224,7 +223,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(250, 248, 245, 0.6); /* Bening tipis biar teks pengantar kebaca */
+            background: rgba(250, 248, 245, 0.6); 
             z-index: 1;
         }
         .gift-content {
@@ -275,6 +274,17 @@
         }
         
         .music-control { position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px; background: rgba(255,255,255,0.9); border: 1px solid #ddd; border-radius: 50%; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+        /* --- RESPONSIVE UNTUK HP (BIAR FONT GAK RAKSASA) --- */
+        @media (max-width: 768px) {
+            .cover-nama { font-size: 2.5rem !important; }
+            #hero .cover-nama { font-size: 2.5rem !important; }
+            .cover-tamu { font-size: 1.2rem !important; }
+            .judul-section { font-size: 1.6rem !important; }
+            .nama-mempelai { font-size: 2rem !important; }
+            #closing h1 { font-size: 2.5rem !important; }
+            .hero-tanggal { font-size: 0.9rem !important; }
+        }
     </style>
 </head>
 <body>
