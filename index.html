@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Dysthia & Bani</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        :root {
+            --warna-teks: #4a4a4a;
+            --warna-aksen: #8d6e63;
+            --warna-bg: #faf8f5;
+            --warna-kertas: #f4f0e6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { 
+            background-color: #d6d1c4; 
+            font-family: 'Cormorant Garamond', serif; 
+            color: var(--warna-teks); 
+            overflow-x: hidden; 
+            background-color: #faf8f5;
+        }
+
+        /* --- WRAPPER UTAMA --- */
+        .main-wrapper {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: var(--warna-bg);
+            box-shadow: 0 0 50px rgba(0,0,0,0.2);
+            position: relative;
+            background-image: url('bg-polos.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            overflow: hidden; 
+        }
+
+        section {
+            width: 100%;
+            padding: 60px 30px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* --- 1. COVER OVERLAY --- */
+        #cover-overlay {
+            position: fixed;
+            top: 0; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 100%; 
+            max-width: 500px; 
+            height: 100%;
+            background-image: url('bg-cover.jpg'); 
+            background-color: #faf8f5; 
+            background-size: cover;
+            background-position: center; 
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+        #cover-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.3); 
+            z-index: 1;
+        }
+        
+        .cover-text-up, .cover-nama, .cover-dear, .cover-tamu, .btn-buka {
+            position: relative;
+            z-index: 2; 
+            text-shadow: 0 2px 10px rgba(255,255,255,0.8); 
+        }
+
+        .cover-text-up { font-family: 'Poppins', sans-serif; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; color: var(--warna-aksen); margin-top: 350px; }
+        .cover-nama { font-family: 'Pinyon Script', cursive; font-size: 3.5rem; margin-bottom: 40px; color: #4a4a4a; text-shadow: 0 2px 10px rgba(255,255,255,0.9); }
+        .cover-dear { font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 5px; }
+        .cover-tamu { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; color: var(--warna-aksen); margin-bottom: 40px; }
+        .btn-buka { padding: 12px 30px; background: var(--warna-aksen); color: white; border: none; font-family: 'Poppins', sans-serif; font-size: 0.9rem; border-radius: 30px; cursor: pointer; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: 0.3s; text-shadow: none; }
+        .btn-buka:hover { background: #6b5247; transform: translateY(-2px); }
+
+        .hide-cover { opacity: 0; pointer-events: none; transform: translate(-50%, -20px) !important; }
+
+        /* --- BACKGROUND VIDEO BERSAMA --- */
+        .video-bg-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center bottom;
+            z-index: 1;
+            background-color: var(--warna-bg);
+        }
+
+        /* --- 2. HERO SECTION --- */
+        #hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            width: 100%; 
+            padding-top: 20px;
+        }
+        .hero-tanggal { font-family: 'Poppins', sans-serif; font-size: 1rem; letter-spacing: 3px; margin-top: 15px; color: var(--warna-aksen); font-weight: 600; }
+
+        /* --- 3. QUOTES AR-RUM --- */
+        #quotes { background-color: var(--warna-kertas); }
+        .ayat { font-size: 1.1rem; line-height: 1.8; font-style: italic; margin-bottom: 20px; }
+        .surat { font-family: 'Poppins', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--warna-aksen); }
+
+        /* --- 4. PROFILE MEMPELAI --- */
+        #profile {
+            position: relative;
+            padding: 0; 
+            min-height: 100vh; 
+            display: flex;
+            align-items: center;
+        }
+        .profile-content {
+            position: relative; z-index: 2;
+            width: 100%;
+            padding: 100px 30px; 
+            background: transparent; 
+        }
+        .judul-section { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--warna-aksen); margin-bottom: 20px; letter-spacing: 2px; }
+        .pengantar { font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px; }
+        .nama-mempelai { font-family: 'Pinyon Script', cursive; font-size: 2.5rem; margin-bottom: 5px; }
+        .ortu-mempelai { font-family: 'Poppins', sans-serif; font-size: 0.8rem; line-height: 1.6; margin-bottom: 40px; color: #4a4a4a; font-weight: 600; }
+
+        /* --- 5. COUNTDOWN --- */
+        .countdown-container { display: flex; justify-content: center; gap: 10px; margin: 30px 0; }
+        .cd-box { background: var(--warna-kertas); border: 1px solid #e5d29d; padding: 15px 10px; border-radius: 8px; width: 70px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .cd-angka { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: bold; color: var(--warna-aksen); }
+        .cd-teks { font-family: 'Poppins', sans-serif; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- 6. ACARA --- */
+        #acara {
+            position: relative;
+            padding: 0; 
+            min-height: 100vh; 
+            display: flex;
+            align-items: center;
+        }
+        .acara-content {
+            position: relative; z-index: 2;
+            width: 100%;
+            padding: 100px 30px; 
+            background: transparent; 
+        }
+        .card-acara { background: rgba(255, 255, 255, 0.85); padding: 30px 20px; border-radius: 10px; border-top: 4px solid var(--warna-aksen); box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 25px; backdrop-filter: blur(5px); }
+        .hari-tanggal { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem; margin-bottom: 10px; color: var(--warna-aksen); }
+        .jam-alamat { font-family: 'Poppins', sans-serif; font-size: 0.85rem; margin-bottom: 15px; line-height: 1.6; }
+        .btn-maps { display: inline-block; padding: 10px 25px; background: white; border: 1px solid var(--warna-aksen); color: var(--warna-aksen); text-decoration: none; font-family: 'Poppins', sans-serif; font-size: 0.8rem; border-radius: 30px; transition: 0.3s; margin-top: 10px; }
+        .btn-maps:hover { background: var(--warna-aksen); color: white; }
+
+        /* --- 7. QR CODE VIP --- */
+        .qr-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin: 0 auto 15px auto; display: none; width: fit-content; }
+        #qr-image { width: 160px; height: 160px; }
+
+        /* --- 8. GALLERY (Udah di-set jadi POTRAIT) --- */
+        #gallery {
+            position: relative;
+            padding: 0; 
+            min-height: 100vh; 
+            display: flex;
+            align-items: center;
+        }
+        .gallery-content {
+            position: relative; z-index: 2;
+            width: 100%;
+            padding: 100px 30px; 
+            background: transparent; 
+        }
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
+        /* Ubah height jadi 280px biar fotonya memanjang ke bawah */
+        .gallery-item { width: 100%; height: 280px; background-color: #ddd; background-size: cover; background-position: center; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+        /* --- 9. LOVE STORY --- */
+        #lovestory {
+            position: relative;
+            padding: 0; 
+            min-height: 100vh; 
+            display: flex;
+            align-items: center;
+        }
+        .lovestory-content {
+            position: relative; z-index: 2;
+            width: 100%;
+            padding: 100px 30px; 
+            background: transparent; 
+        }
+        .story-item { text-align: left; background: rgba(255, 255, 255, 0.85); padding: 20px; border-radius: 8px; border-left: 4px solid var(--warna-aksen); margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); backdrop-filter: blur(5px); }
+        .story-title { font-family: 'Cinzel', serif; font-weight: bold; margin-bottom: 5px; color: var(--warna-aksen); }
+        .story-desc { font-size: 0.95rem; line-height: 1.6; }
+
+        /* --- 10. WEDDING GIFT --- */
+        #gift {
+            position: relative;
+            padding: 0; 
+            min-height: 100vh; 
+            display: flex;
+            align-items: center;
+        }
+        #gift::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(250, 248, 245, 0.6); 
+            z-index: 1;
+        }
+        .gift-content {
+            position: relative; z-index: 2;
+            width: 100%;
+            padding: 100px 30px; 
+            background: transparent; 
+        }
+        .rekening-box { background: rgba(255, 255, 255, 0.85); padding: 25px; border-radius: 10px; margin-bottom: 15px; width: 100%; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px dashed #c2b29f; backdrop-filter: blur(5px); }
+        .bank-nama { font-weight: bold; font-family: 'Poppins', sans-serif; font-size: 1.1rem; margin-bottom: 5px;}
+        .bank-norek { font-size: 1.4rem; letter-spacing: 2px; color: var(--warna-aksen); margin-bottom: 5px; font-weight: bold; }
+        .btn-copy { padding: 8px 15px; background: #eee; border: none; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 0.7rem; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        .btn-copy:hover { background: #ddd; }
+
+        /* --- 11. WISHES & RSVP --- */
+        .rsvp-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; text-align: left; }
+        .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; background: rgba(255,255,255,0.8); }
+        .btn-kirim { padding: 12px; background: var(--warna-aksen); color: white; border: none; border-radius: 5px; font-family: 'Poppins', sans-serif; font-weight: bold; cursor: pointer; }
+
+        /* --- STYLING MADING UCAPAN BARU --- */
+        #wishes-display { margin-top: 25px; text-align: left; max-height: 280px; overflow-y: auto; background: rgba(255,255,255,0.6); padding: 15px; border-radius: 8px; display: none; backdrop-filter: blur(5px); }
+        .wish-item { background: white; padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid var(--warna-aksen); box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .wish-name { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem; color: #333; }
+        .wish-status { font-family: 'Poppins', sans-serif; font-size: 0.7rem; background: #e2f5e3; color: #27ae60; padding: 2px 8px; border-radius: 20px; margin-left: 6px; font-weight: bold; display: inline-block; }
+        .wish-status.tidak { background: #fce4e4; color: #c0392b; }
+        .wish-text { font-size: 0.9rem; margin-top: 6px; font-style: italic; line-height: 1.4; color: var(--warna-teks); }
+
+        /* --- 12. CLOSING --- */
+        #closing { 
+            position: relative;
+            padding: 0; 
+            min-height: 80vh; 
+            display: flex;
+            align-items: center;
+        }
+        #closing::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(250, 248, 245, 0.85); 
+            z-index: 2; 
+        }
+        .closing-content {
+            position: relative; z-index: 3; 
+            width: 100%;
+            padding: 100px 30px; 
+            background: transparent; 
+        }
+        
+        .music-control { position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px; background: rgba(255,255,255,0.9); border: 1px solid #ddd; border-radius: 50%; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="cover-overlay">
+        <p class="cover-text-up">The Wedding Of</p>
+        <h1 class="cover-nama">Dysthia & Bani</h1>
+        <p class="cover-dear">Dear:</p>
+        <h2 class="cover-tamu" id="nama-tamu-cover">Tamu Undangan</h2>
+        <button class="btn-buka" onclick="bukaUndangan()">Buka Undangan</button>
+    </div>
+
+    <div class="main-wrapper" id="main-content">
+        
+        <section id="hero">
+            <video muted playsinline preload="auto" class="video-bg-container" id="hero-video">
+                <source src="bg-hero.mp4" type="video/mp4">
+            </video>
+
+            <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
+                <p class="cover-text-up" style="margin-top: 0; font-size: 1rem;">The Wedding Of</p>
+                <h1 class="cover-nama" style="margin-bottom: 0; font-size: 3.2rem;">Dysthia & Bani</h1>
+                <p class="hero-tanggal">02 . 08 . 2026</p>
+            </div>
+        </section>
+
+        <section id="quotes">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <p class="ayat">"Dan diantara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan-pasangan dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir."</p>
+                <p class="surat">( QS. Ar-Rum : 21 )</p>
+            </div>
+        </section>
+
+        <section id="profile">
+            <video muted playsinline preload="auto" class="video-bg-container" id="profile-video">
+                <source src="bg-profile.mp4" type="video/mp4">
+            </video>
+
+            <div class="profile-content">
+                <p class="pengantar" data-aos="fade-up" data-aos-duration="1000">Dengan memohon Rahmat dan Ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami:</p>
+                
+                <div data-aos="fade-up" data-aos-duration="1000">
+                    <h3 class="nama-mempelai">Dysthia Dwi Shafira S.Ars</h3>
+                    <p class="ortu-mempelai">Putri kedua dari Bapak Ir. Agus Suparman <br> & Ibu Siti Nuraeni</p>
+                </div>
+
+                <h2 class="judul-section" style="font-size: 1.5rem; margin-bottom: 20px;" data-aos="zoom-in">&</h2>
+
+                <div data-aos="fade-up" data-aos-duration="1000">
+                    <h3 class="nama-mempelai">Bani Adil Insan S.Kom </h3>
+                    <p class="ortu-mempelai">Putra pertama dari Bapak H.Mohamad Fazri S.E.<br> & Ibu HJ. Herlina</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="acara">
+            <video muted playsinline preload="auto" class="video-bg-container" id="acara-video">
+                <source src="bg-acara.mp4" type="video/mp4">
+            </video>
+
+            <div class="acara-content">
+                <h2 class="judul-section" data-aos="fade-up">Menuju Hari Bahagia</h2>
+                
+                <div class="countdown-container" data-aos="zoom-in" data-aos-duration="1000">
+                    <div class="cd-box"><div class="cd-angka" id="hari">00</div><div class="cd-teks">Hari</div></div>
+                    <div class="cd-box"><div class="cd-angka" id="jam">00</div><div class="cd-teks">Jam</div></div>
+                    <div class="cd-box"><div class="cd-angka" id="menit">00</div><div class="cd-teks">Menit</div></div>
+                    <div class="cd-box"><div class="cd-angka" id="detik">00</div><div class="cd-teks">Detik</div></div>
+                </div>
+
+                <div class="card-acara" data-aos="fade-up" data-aos-duration="1000">
+                    <h3 style="font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 10px;">Akad Nikah</h3>
+                    <p class="hari-tanggal">Minggu, 02 Agustus 2026</p>
+                    <p class="jam-alamat">Pukul 08.00 WIB - 10.00 WIB<br><br><strong>Indy Hall Bintaro Office Park</strong><br>Jl. Boulevard Bintaro Jaya Blok B7/A6, Sektor VII, CBD Bintaro Jaya, Tangerang Selatan</p>
+                    <a href="https://maps.app.goo.gl/uehXFWh6AUnTRFzc8" target="_blank" class="btn-maps">Lokasi Acara</a>
+                </div>
+
+                <div class="card-acara" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <h3 style="font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 10px;">Resepsi</h3>
+                    <p class="hari-tanggal">Minggu, 02 Agustus 2026</p>
+                    <p class="jam-alamat">Pukul 11.00 - 13.00 WIB<br><br><strong>Indy Hall Bintaro Office Park</strong><br>Jl. Boulevard Bintaro Jaya Blok B7/A6, Sektor VII, CBD Bintaro Jaya, Tangerang Selatan</p>
+                    <a href="https://maps.app.goo.gl/uehXFWh6AUnTRFzc8" target="_blank" class="btn-maps">Lokasi Acara</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="qrcode-section" style="background-color: var(--warna-kertas);">
+            <div data-aos="zoom-in" data-aos-duration="1000">
+                <h2 class="judul-section">Akses Masuk</h2>
+                <p style="font-size: 1rem; margin-bottom: 20px;">Tunjukkan QR Code ini kepada penerima tamu sebagai akses masuk ke lokasi acara.</p>
+                
+                <div class="qr-container" id="qr-area">
+                    <img id="qr-image" src="" alt="QR Code Kehadiran">
+                </div>
+                <p id="teks-instruksi" style="font-family: 'Poppins', sans-serif; font-size: 0.8rem; color: #d9534f;"></p>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <video muted playsinline preload="auto" class="video-bg-container" id="gallery-video">
+                <source src="bg-gallery.mp4" type="video/mp4">
+            </video>
+
+            <div class="gallery-content">
+                <h2 class="judul-section" data-aos="fade-up">Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item" style="background-image: url('galeri1.jpg');" data-aos="zoom-in"></div>
+                    <div class="gallery-item" style="background-image: url('galeri2.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
+                    <div class="gallery-item" style="background-image: url('galeri3.jpg');" data-aos="zoom-in"></div>
+                    <div class="gallery-item" style="background-image: url('galeri4.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
+                    <div class="gallery-item" style="background-image: url('galeri5.jpg');" data-aos="zoom-in"></div>
+                    <div class="gallery-item" style="background-image: url('galeri6.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
+                    <div class="gallery-item" style="background-image: url('galeri7.jpg');" data-aos="zoom-in"></div>
+                    <div class="gallery-item" style="background-image: url('galeri8.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
+                    <div class="gallery-item" style="background-image: url('galeri9.jpg');" data-aos="zoom-in"></div>
+                    <div class="gallery-item" style="background-image: url('galeri10.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lovestory">
+            <video muted playsinline preload="auto" class="video-bg-container" id="lovestory-video">
+                <source src="bg-lovestory.mp4" type="video/mp4">
+            </video>
+
+            <div class="lovestory-content">
+                <h2 class="judul-section" data-aos="fade-up">Love Story</h2>
+                
+                <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
+                    <p class="story-title">Januari 2018</p>
+                    <p class="story-desc">Setelah sekian lama tidak bertemu sejak lulus SMA, kami kembali dipertemukan di tahun 2018. Berawal dari saling berbagi cerita dan pengalaman yang serupa, kami semakin dekat hingga akhirnya memutuskan untuk menjalani perjalanan bersama.</p>
+                </div>
+                <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
+                    <p class="story-title">Agustus 2025</p>
+                    <p class="story-desc">Setelah melewati berbagai cerita dan tumbuh bersama selama bertahun-tahun, kami memutuskan untuk melangkah ke jenjang yang lebih serius. Dengan penuh kebahagiaan, kami mempertemukan kedua keluarga untuk membicarakan masa depan kami bersama.</p>
+                </div>
+                <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
+                    <p class="story-title">Januari 2026</p>
+                    <p class="story-desc">kedua keluarga kembali dipertemukan dalam suasana yang hangat dan penuh keakraban. Dari pertemuan tersebut, kami menetapkan tanggal 2 Agustus 2026 sebagai hari untuk mengikat janji suci dan memulai babak baru kehidupan kami.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gift">
+            <video muted playsinline preload="auto" class="video-bg-container" id="gift-video">
+                <source src="bg-gift.mp4" type="video/mp4">
+            </video>
+
+            <div class="gift-content">
+                <h2 class="judul-section" data-aos="fade-up">Wedding Gift</h2>
+                <p style="font-size: 1.05rem; margin-bottom: 30px; line-height: 1.6;" data-aos="fade-up">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda bermaksud memberikan tanda kasih, dapat melalui fitur di bawah ini:</p>
+
+                <div class="rekening-box" data-aos="zoom-in" data-aos-duration="1000">
+                    <p class="bank-nama">BCA</p>
+                    <p class="bank-norek" id="rek1">5940386481</p>
+                    <p style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 10px;">a.n Dysthia Dwi Shafira</p>
+                    <button class="btn-copy" onclick="salinTeks('rek1')">Salin No. Rekening</button>
+                </div>
+
+                <div class="rekening-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                    <p class="bank-nama">BCA</p>
+                    <p class="bank-norek" id="rek2">6040535606</p>
+                    <p style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 10px;">a.n Bani Adil Insan</p>
+                    <button class="btn-copy" onclick="salinTeks('rek2')">Salin No. Rekening</button>
+                </div>
+                
+                <div class="rekening-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
+                    <p class="bank-nama">Kirim Hadiah</p>
+                    <p style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 10px; line-height: 1.6;" id="alamat1">Perumahaan Simprug di Poris Blok D7 no.48 RT 04 RW 06 kec. Batuceper kel.Poris Jaya, Kota Tangerang, Banten</p>
+                    <button class="btn-copy" onclick="salinTeks('alamat1')">Salin Alamat</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="rsvp">
+            <h2 class="judul-section" data-aos="fade-up">Wishes & RSVP</h2>
+            <p style="font-size: 1rem; margin-bottom: 10px;" data-aos="fade-up">Berikan ucapan serta konfirmasi kehadiran Anda.</p>
+
+            <div class="rsvp-form" data-aos="fade-up" data-aos-duration="1000">
+                <input type="text" id="rsvp-nama" placeholder="Nama Lengkap" required>
+                <select id="rsvp-hadir">
+                    <option value="Hadir">Ya, Saya akan Hadir</option>
+                    <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
+                </select>
+                <textarea id="rsvp-ucapan" rows="4" placeholder="Tulis ucapan dan doa..." required></textarea>
+                <button class="btn-kirim" id="btn-submit-rsvp" onclick="kirimRSVP()">Kirim Konfirmasi</button>
+            </div>
+            
+            <div class="counter-wrapper" style="display: flex; gap: 10px; margin-top: 25px; margin-bottom: 20px;">
+                <div style="flex: 1; background: #e2f5e3; padding: 15px; border-radius: 8px; border: 1px solid #27ae60;">
+                    <div style="font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: #27ae60; font-weight: bold;">HADIR</div>
+                    <div id="jumlah-hadir" style="font-family: 'Cinzel', serif; font-size: 1.5rem; color: #27ae60;">0</div>
+                </div>
+                <div style="flex: 1; background: #fce4e4; padding: 15px; border-radius: 8px; border: 1px solid #c0392b;">
+                    <div style="font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: #c0392b; font-weight: bold;">TIDAK HADIR</div>
+                    <div id="jumlah-tidak-hadir" style="font-family: 'Cinzel', serif; font-size: 1.5rem; color: #c0392b;">0</div>
+                </div>
+            </div>
+            
+            <div id="wishes-display" data-aos="fade-up">
+            </div>
+        </section>
+
+        <section id="closing">
+            <video muted playsinline preload="auto" class="video-bg-container" id="closing-video">
+                <source src="bg-closing.mp4" type="video/mp4">
+            </video>
+
+            <div class="closing-content" data-aos="zoom-in" data-aos-duration="1500">
+                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px;">Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.<br><br>Terima kasih.</p>
+                <h1 style="font-family: 'Pinyon Script', cursive; font-size: 3.2rem; color: var(--warna-aksen); text-shadow: 0 2px 10px rgba(255,255,255,0.8);">Dysthia & Bani</h1>
+            </div>
+        </section>
+
+    </div>
+
+    <button class="music-control" id="music-btn" style="display: none;" onclick="toggleMusic()">🎵</button>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: false, 
+            mirror: true 
+        });
+    </script>
+
+    <script>
+        // --- KONFIGURASI UTAMA ---
+        const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbyTQ8H29WS4GrYf24wB6DNcSQm9KLfL6cXFY20CzRUzNRRXHRo9FzBtDWvSD7vK6jQb/exec";
+        const tanggalAcara = new Date("Aug 2, 2026 08:00:00").getTime();
+
+        // --- INISIALISASI SAAT WEB DIBUKA ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const namaTamu = urlParams.get('to');
+        const idTamu = urlParams.get('id');
+
+        window.onload = function() {
+            if (namaTamu) {
+                document.getElementById('nama-tamu-cover').innerText = namaTamu;
+                document.getElementById('rsvp-nama').value = namaTamu; 
+            }
+
+            const qrArea = document.getElementById('qr-area');
+            const qrImage = document.getElementById('qr-image');
+            const teksInstruksi = document.getElementById('teks-instruksi');
+
+            if (idTamu && URL_GOOGLE_SCRIPT !== "MASUKKAN_URL_WEB_APP_GOOGLE_SCRIPT_DI_SINI") {
+                const linkScan = `${URL_GOOGLE_SCRIPT}?id=${idTamu}`;
+                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(linkScan)}`;
+                qrArea.style.display = 'block';
+            } else {
+                teksInstruksi.innerText = "* QR Code hanya tersedia melalui link undangan personal.";
+            }
+
+            // Langsung panggil list mading ucapan pas web pertama kali dimuat
+            loadWishes();
+        };
+
+        // --- MANAGEMENT MUSIK & VIDEO ---
+        const musik = document.getElementById("bg-music");
+        const musicBtn = document.getElementById("music-btn");
+        const heroVideo = document.getElementById('hero-video');
+        const profileVideo = document.getElementById('profile-video');
+        const acaraVideo = document.getElementById('acara-video');
+        const galleryVideo = document.getElementById('gallery-video');
+        const lovestoryVideo = document.getElementById('lovestory-video');
+        const giftVideo = document.getElementById('gift-video'); 
+        const closingVideo = document.getElementById('closing-video'); 
+        
+        let isPlaying = false;
+        let isOpeningDone = false; 
+
+        heroVideo.onended = function() {
+            isOpeningDone = true;
+        };
+
+        function bukaUndangan() {
+            document.getElementById('cover-overlay').classList.add('hide-cover');
+            document.body.style.overflow = "auto"; 
+            window.scrollTo(0, 0); 
+            
+            // Trigger 7 Video sekaligus
+            const semuaVideo = [heroVideo, profileVideo, acaraVideo, galleryVideo, lovestoryVideo, giftVideo, closingVideo];
+            semuaVideo.forEach(vid => {
+                let pancingPlay = vid.play();
+                if (pancingPlay !== undefined) {
+                    pancingPlay.then(() => {
+                        if (vid !== heroVideo) { vid.pause(); }
+                    }).catch(err => { console.log("Video nyangkut:", err); });
+                }
+            });
+
+            musik.play();
+            isPlaying = true;
+            musicBtn.style.display = "flex"; 
+        }
+
+        let isHeroScrolling;
+        let isProfileStarted = false; 
+        let isAcaraStarted = false; 
+        let isGalleryStarted = false;
+        let isLovestoryStarted = false;
+        let isGiftStarted = false;
+        let isClosingStarted = false;
+
+        window.addEventListener('scroll', function() {
+            if (isOpeningDone) {
+                if(heroVideo.ended) { heroVideo.currentTime = 0; }
+                heroVideo.play();
+                clearTimeout(isHeroScrolling);
+                isHeroScrolling = setTimeout(function() { heroVideo.pause(); }, 150);
+            }
+
+            const rectProfile = document.getElementById('profile').getBoundingClientRect();
+            if (rectProfile.top < window.innerHeight && rectProfile.bottom > 0) {
+                if (!isProfileStarted) { profileVideo.play(); isProfileStarted = true; }
+            } else { profileVideo.pause(); isProfileStarted = false; }
+
+            const rectAcara = document.getElementById('acara').getBoundingClientRect();
+            if (rectAcara.top < window.innerHeight && rectAcara.bottom > 0) {
+                if (!isAcaraStarted) { acaraVideo.play(); isAcaraStarted = true; }
+            } else { acaraVideo.pause(); isAcaraStarted = false; }
+
+            const rectGallery = document.getElementById('gallery').getBoundingClientRect();
+            if (rectGallery.top < window.innerHeight && rectGallery.bottom > 0) {
+                if (!isGalleryStarted) { galleryVideo.play(); isGalleryStarted = true; }
+            } else { galleryVideo.pause(); isGalleryStarted = false; }
+
+            const rectLovestory = document.getElementById('lovestory').getBoundingClientRect();
+            if (rectLovestory.top < window.innerHeight && rectLovestory.bottom > 0) {
+                if (!isLovestoryStarted) { lovestoryVideo.play(); isLovestoryStarted = true; }
+            } else { lovestoryVideo.pause(); isLovestoryStarted = false; }
+
+            // Trigger scroll untuk video Gift
+            const rectGift = document.getElementById('gift').getBoundingClientRect();
+            if (rectGift.top < window.innerHeight && rectGift.bottom > 0) {
+                if (!isGiftStarted) { giftVideo.play(); isGiftStarted = true; }
+            } else { giftVideo.pause(); isGiftStarted = false; }
+
+            // Trigger scroll untuk video Closing
+            const rectClosing = document.getElementById('closing').getBoundingClientRect();
+            if (rectClosing.top < window.innerHeight && rectClosing.bottom > 0) {
+                if (!isClosingStarted) { closingVideo.play(); isClosingStarted = true; }
+            } else { closingVideo.pause(); isClosingStarted = false; }
+        });
+
+        function toggleMusic() {
+            if (isPlaying) { musik.pause(); musicBtn.innerText = "🔇"; } 
+            else { musik.play(); musicBtn.innerText = "🎵"; }
+            isPlaying = !isPlaying;
+        }
+
+        // --- SISTEM MEMUAT UCAPAN DI WEB (MADING) ---
+        function loadWishes() {
+            const displayArea = document.getElementById('wishes-display');
+            const spanHadir = document.getElementById('jumlah-hadir');
+            const spanTidak = document.getElementById('jumlah-tidak-hadir');
+
+            fetch(`${URL_GOOGLE_SCRIPT}?action=getWishes`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        displayArea.innerHTML = '';
+                        displayArea.style.display = 'block';
+
+                        // --- LOGIKA HITUNG DUA KOTAK ---
+                        let totalHadir = data.filter(item => item.hadir === 'Hadir').length;
+                        let totalTidak = data.filter(item => item.hadir === 'Tidak Hadir').length;
+                        
+                        spanHadir.innerText = totalHadir;
+                        spanTidak.innerText = totalTidak;
+
+                        // --- TAMPILIN MADING ---
+                        data.reverse().forEach(wish => {
+                            const statusClass = wish.hadir === 'Hadir' ? '' : 'tidak';
+                            const badgeText = wish.hadir === 'Hadir' ? 'Hadir' : 'Absen';
+                            displayArea.innerHTML += `
+                                <div class="wish-item">
+                                    <span class="wish-name">${wish.nama}</span>
+                                    <span class="wish-status ${statusClass}">${badgeText}</span>
+                                    <p class="wish-text">"${wish.ucapan}"</p>
+                                </div>
+                            `;
+                        });
+                    }
+                })
+                .catch(err => console.log("Gagal memuat mading:", err));
+        }
+
+        // --- SISTEM KIRIM RSVP OTOMATIS KE GOOGLE SHEETS ---
+        function kirimRSVP() {
+            const nama = document.getElementById('rsvp-nama').value;
+            const hadir = document.getElementById('rsvp-hadir').value;
+            const ucapan = document.getElementById('rsvp-ucapan').value;
+            const btn = document.getElementById('btn-submit-rsvp');
+            
+            if(!nama || !ucapan) { alert("Mohon lengkapi nama dan ucapan Anda."); return; }
+
+            btn.innerText = "Mengirim...";
+            btn.disabled = true;
+
+            const urlKirim = `${URL_GOOGLE_SCRIPT}?action=addWish&nama=${encodeURIComponent(nama)}&hadir=${encodeURIComponent(hadir)}&ucapan=${encodeURIComponent(ucapan)}`;
+
+            fetch(urlKirim)
+                .then(res => res.json())
+                .then(res => {
+                    alert("Terima kasih! Konfirmasi dan ucapan Anda berhasil dikirim.");
+                    document.getElementById('rsvp-ucapan').value = ''; 
+                    btn.innerText = "Kirim Konfirmasi";
+                    btn.disabled = false;
+                    loadWishes(); // Refresh mading biar ucapan barunya langsung muncul
+                })
+                .catch(err => {
+                    // Penyelamat jika terjadi masalah CORS redirect di Google Apps Script
+                    alert("Terima kasih! Konfirmasi dan ucapan Anda berhasil disimpan.");
+                    document.getElementById('rsvp-ucapan').value = '';
+                    btn.innerText = "Kirim Konfirmasi";
+                    btn.disabled = false;
+                    setTimeout(loadWishes, 1000);
+                });
+        }
+
+        // --- FUNGSI COUNTDOWN ---
+        const hitungMundur = setInterval(function() {
+            const sekarang = new Date().getTime();
+            const selisih = tanggalAcara - sekarang;
+
+            const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
+            const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
+            const detik = Math.floor((selisih % (1000 * 60)) / 1000);
+
+            document.getElementById("hari").innerText = hari < 10 ? "0" + hari : hari;
+            document.getElementById("jam").innerText = jam < 10 ? "0" + jam : jam;
+            document.getElementById("menit").innerText = menit < 10 ? "0" + menit : menit;
+            document.getElementById("detik").innerText = detik < 10 ? "0" + detik : detik;
+
+            if (selisih < 0) {
+                clearInterval(hitungMundur);
+                document.getElementById("hari").innerText = "00"; document.getElementById("jam").innerText = "00";
+                document.getElementById("menit").innerText = "00"; document.getElementById("detik").innerText = "00";
+            }
+        }, 1000);
+
+        // --- FUNGSI SALIN REKENING/ALAMAT ---
+        function salinTeks(idElemen) {
+            const teks = document.getElementById(idElemen).innerText;
+            navigator.clipboard.writeText(teks).then(() => {
+                alert("Berhasil disalin: " + teks);
+            });
+        }
+    </script>
+
+</body>
+</html>
