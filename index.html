@@ -121,12 +121,11 @@
             padding: 0;
         }
 
-        /* REVISI: EFEK KABUT TIPIS HERO TEBELIN JIRR (dr 0.4 ke 0.7) */
+        /* EFEK KABUT TIPIS HERO (0.7) */
         #hero::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Warna kertas var(--warna-kertas) tapi transparan 70% biar tulisan POP OUT */
             background: rgba(244, 240, 230, 0.7); 
             z-index: 2; 
         }
@@ -150,6 +149,40 @@
         
         .hero-tanggal { font-family: 'Poppins', sans-serif; font-size: 1rem; letter-spacing: 3px; margin-top: 15px; color: var(--warna-aksen); font-weight: 600; }
 
+        /* --- REVISI ANIMASI PANAH SCROLL --- */
+        .scroll-wrapper {
+            position: absolute;
+            bottom: 40px; /* Dijamin nempel di bawah layar! */
+            left: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            animation: floatScroll 2s ease-in-out infinite;
+        }
+        .scroll-teks {
+            font-family: 'Poppins', sans-serif; 
+            font-size: 0.7rem; 
+            letter-spacing: 4px; 
+            color: #fff; 
+            font-weight: 600; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Bayangan estetik biar kebaca jelas */
+            margin-bottom: 5px;
+        }
+        .chevron {
+            width: 16px;
+            height: 16px;
+            border-bottom: 2px solid #fff;
+            border-right: 2px solid #fff;
+            transform: rotate(45deg);
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+        }
+        @keyframes floatScroll {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(12px); opacity: 1; }
+        }
+
         /* --- 3. QUOTES AR-RUM --- */
         #quotes { background-color: var(--warna-kertas); }
         .ayat { font-size: 1.1rem; line-height: 1.8; font-style: italic; margin-bottom: 20px; }
@@ -161,12 +194,11 @@
             padding: 0; 
             min-height: 100vh; 
             display: flex;
-            align-items: center; /* Vertikal center di wrapper video */
+            align-items: center;
         }
         .profile-content {
             position: relative; z-index: 2;
             width: 100%;
-            /* Padding atas dikecilin drastis dr 100px ke 20px biar naik */
             padding: 20px 30px 100px 30px; 
             background: transparent; 
         }
@@ -194,7 +226,7 @@
         .acara-content {
             position: relative; z-index: 2;
             width: 100%;
-            padding: 100px 30px; 
+            padding: 40px 30px 100px 30px; 
             background: transparent; 
         }
         .card-acara { background: rgba(255, 255, 255, 0.85); padding: 30px 20px; border-radius: 10px; border-top: 4px solid var(--warna-aksen); box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 25px; backdrop-filter: blur(5px); }
@@ -310,8 +342,8 @@
 
        /* --- RESPONSIVE UNTUK HP --- */
         @media (max-width: 768px) {
-            /* Padding top dikecilin bgt dr 160px ke 40px biar naik di HP */
             .profile-content { padding-top: 40px !important; } 
+            .acara-content { padding-top: 30px !important; } 
             
             .cover-nama { font-size: 2.5rem !important; }
             #hero .cover-nama { font-size: 2.5rem !important; }
@@ -348,6 +380,11 @@
                 <p class="cover-text-up" style="margin-top: 0; font-size: 1rem;">The Wedding Of</p>
                 <h1 class="cover-nama" style="margin-bottom: 0; font-size: 3.2rem;">Dysthia & Bani</h1>
                 <p class="hero-tanggal" style="margin-top: 5px;">02 . 08 . 2026</p>
+            </div>
+
+            <div class="scroll-wrapper">
+                <p class="scroll-teks">SCROLL</p>
+                <div class="chevron"></div>
             </div>
         </section>
 
@@ -386,7 +423,7 @@
             </video>
 
             <div class="acara-content">
-                <h2 class="judul-section" data-aos="fade-up">Menuju Hari Bahagia</h2>
+                <h2 class="judul-section" data-aos="fade-up" style="margin-top: -40px; margin-bottom: 25px;">Menuju Hari Bahagia</h2>
                 
                 <div class="countdown-container" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="cd-box"><div class="cd-angka" id="hari">00</div><div class="cd-teks">Hari</div></div>
