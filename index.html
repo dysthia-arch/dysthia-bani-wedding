@@ -121,17 +121,18 @@
             padding: 0;
         }
 
-        /* Efek kabut tipis Hero */
+        /* REVISI: EFEK KABUT TIPIS HERO TEBELIN JIRR (dr 0.4 ke 0.7) */
         #hero::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(250, 248, 245, 0.4); 
+            /* Warna kertas var(--warna-kertas) tapi transparan 70% biar tulisan POP OUT */
+            background: rgba(244, 240, 230, 0.7); 
             z-index: 2; 
         }
 
         .hero-content {
-            position: relative; z-index: 3; 
+            position: relative; z-index: 3; /* Biar tulisan tetep di atas kabut */
             width: 100%; 
             padding-top: 20px;
         }
@@ -165,7 +166,7 @@
         .profile-content {
             position: relative; z-index: 2;
             width: 100%;
-            /* REVISI: Padding atas dikecilin drastis dr 100px ke 20px biar naik */
+            /* Padding atas dikecilin drastis dr 100px ke 20px biar naik */
             padding: 20px 30px 100px 30px; 
             background: transparent; 
         }
@@ -309,7 +310,7 @@
 
        /* --- RESPONSIVE UNTUK HP --- */
         @media (max-width: 768px) {
-            /* REVISI MOBILE: Padding top dikecilin bgt dr 160px ke 40px biar naik di HP */
+            /* Padding top dikecilin bgt dr 160px ke 40px biar naik di HP */
             .profile-content { padding-top: 40px !important; } 
             
             .cover-nama { font-size: 2.5rem !important; }
