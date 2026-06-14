@@ -121,22 +121,22 @@
             padding: 0;
         }
 
-        /* INI EFEK KABUT TIPIS HERO NYA */
+        /* Efek kabut tipis Hero */
         #hero::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(250, 248, 245, 0.4); /* Ketebalan kabut, bisa dinaikin ke 0.5 atau 0.6 kalau masih kurang */
+            background: rgba(250, 248, 245, 0.4); 
             z-index: 2; 
         }
 
         .hero-content {
-            position: relative; z-index: 3; /* Biar tulisan tetep di atas kabut */
+            position: relative; z-index: 3; 
             width: 100%; 
             padding-top: 20px;
         }
 
-        /* INI KUNCI EFEK GLOW TEKS HERO (DIKURANGIN DIKIT BIAR GAK NABRAK KABUT) */
+        /* Efek glow teks hero */
         .hero-content .cover-text-up, 
         .hero-content .cover-nama, 
         .hero-content .hero-tanggal {
@@ -144,7 +144,7 @@
                 0 0 10px rgba(255,255,255,0.8), 
                 0 0 20px rgba(255,255,255,0.8), 
                 0 0 30px rgba(255,255,255,0.5);
-            font-weight: bold; /* Ditebelin dikit biar makin jelas */
+            font-weight: bold;
         }
         
         .hero-tanggal { font-family: 'Poppins', sans-serif; font-size: 1rem; letter-spacing: 3px; margin-top: 15px; color: var(--warna-aksen); font-weight: 600; }
@@ -160,17 +160,18 @@
             padding: 0; 
             min-height: 100vh; 
             display: flex;
-            align-items: center;
+            align-items: center; /* Vertikal center di wrapper video */
         }
         .profile-content {
             position: relative; z-index: 2;
             width: 100%;
-            padding: 100px 30px; 
+            /* REVISI: Padding atas dikecilin drastis dr 100px ke 20px biar naik */
+            padding: 20px 30px 100px 30px; 
             background: transparent; 
         }
         .judul-section { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--warna-aksen); margin-bottom: 20px; letter-spacing: 2px; }
         
-        /* INI KODINGAN BARU BUAT TEKS HALAMAN KETIGA BIAR TEBEL & GLOWING */
+        /* Teks tebel & glowing */
         .pengantar { font-size: 1.15rem; line-height: 1.6; margin-bottom: 40px; font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.9); }
         .nama-mempelai { font-family: 'Pinyon Script', cursive; font-size: 2.8rem; margin-bottom: 5px; font-weight: bold; text-shadow: 0 0 15px rgba(255,255,255,0.9); }
         .ortu-mempelai { font-family: 'Poppins', sans-serif; font-size: 0.85rem; line-height: 1.6; margin-bottom: 40px; color: #222; font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.9); }
@@ -252,9 +253,9 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(250, 248, 245, 0.5); /* Overlay bening tipis */
-            backdrop-filter: blur(8px); /* <--- INI KODE SAKTI BLUR-NYA */
-            -webkit-backdrop-filter: blur(8px); /* Biar efeknya jalan lancar di iPhone/Safari */
+            background: rgba(250, 248, 245, 0.5); 
+            backdrop-filter: blur(8px); 
+            -webkit-backdrop-filter: blur(8px); 
             z-index: 1;
         }
         .gift-content {
@@ -306,9 +307,11 @@
         
         .music-control { position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px; background: rgba(255,255,255,0.9); border: 1px solid #ddd; border-radius: 50%; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
 
-       /* --- RESPONSIVE UNTUK HP (BIAR FONT GAK RAKSASA) --- */
+       /* --- RESPONSIVE UNTUK HP --- */
         @media (max-width: 768px) {
-            .profile-content { padding-top: 160px !important; } 
+            /* REVISI MOBILE: Padding top dikecilin bgt dr 160px ke 40px biar naik di HP */
+            .profile-content { padding-top: 40px !important; } 
+            
             .cover-nama { font-size: 2.5rem !important; }
             #hero .cover-nama { font-size: 2.5rem !important; }
             .cover-tamu { font-size: 1.2rem !important; }
