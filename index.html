@@ -104,6 +104,18 @@
             background-color: var(--warna-bg);
         }
 
+        /* --- KOTAK KACA BLUR (GLASSMORPHISM) --- */
+        .kotak-kaca-blur {
+            background: rgba(255, 255, 255, 0.25); /* Kotak putih super transparan */
+            backdrop-filter: blur(10px); /* Efek blur utama */
+            -webkit-backdrop-filter: blur(10px); /* Dukungan untuk iPhone/Safari */
+            padding: 30px 20px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.4); /* Garis tepi bening */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05); /* Bayangan super halus */
+            display: inline-block;
+        }
+
         /* --- 2. HERO SECTION --- */
         #hero {
             height: 100vh;
@@ -312,9 +324,11 @@
             </video>
 
             <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
-                <p class="cover-text-up" style="margin-top: 0; font-size: 1rem;">The Wedding Of</p>
-                <h1 class="cover-nama" style="margin-bottom: 0; font-size: 3.2rem;">Dysthia & Bani</h1>
-                <p class="hero-tanggal">02 . 08 . 2026</p>
+                <div class="kotak-kaca-blur">
+                    <p class="cover-text-up" style="margin-top: 0; font-size: 1rem;">The Wedding Of</p>
+                    <h1 class="cover-nama" style="margin-bottom: 0; font-size: 3.2rem;">Dysthia & Bani</h1>
+                    <p class="hero-tanggal" style="margin-top: 5px;">02 . 08 . 2026</p>
+                </div>
             </div>
         </section>
 
