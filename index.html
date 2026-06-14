@@ -121,12 +121,11 @@
             padding: 0;
         }
 
-        /* REVISI: EFEK KABUT TIPIS HERO TEBELIN JIRR (dr 0.4 ke 0.7) */
+        /* EFEK KABUT TIPIS HERO TEBELIN (0.7) */
         #hero::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Warna kertas var(--warna-kertas) tapi transparan 70% biar tulisan POP OUT */
             background: rgba(244, 240, 230, 0.7); 
             z-index: 2; 
         }
@@ -161,12 +160,11 @@
             padding: 0; 
             min-height: 100vh; 
             display: flex;
-            align-items: center; /* Vertikal center di wrapper video */
+            align-items: center;
         }
         .profile-content {
             position: relative; z-index: 2;
             width: 100%;
-            /* Padding atas dikecilin drastis dr 100px ke 20px biar naik */
             padding: 20px 30px 100px 30px; 
             background: transparent; 
         }
@@ -194,7 +192,8 @@
         .acara-content {
             position: relative; z-index: 2;
             width: 100%;
-            padding: 100px 30px; 
+            /* Sedikit angkat keseluruhan section acaranya */
+            padding: 40px 30px 100px 30px; 
             background: transparent; 
         }
         .card-acara { background: rgba(255, 255, 255, 0.85); padding: 30px 20px; border-radius: 10px; border-top: 4px solid var(--warna-aksen); box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 25px; backdrop-filter: blur(5px); }
@@ -310,8 +309,8 @@
 
        /* --- RESPONSIVE UNTUK HP --- */
         @media (max-width: 768px) {
-            /* Padding top dikecilin bgt dr 160px ke 40px biar naik di HP */
             .profile-content { padding-top: 40px !important; } 
+            .acara-content { padding-top: 30px !important; } /* Angkat di HP juga */
             
             .cover-nama { font-size: 2.5rem !important; }
             #hero .cover-nama { font-size: 2.5rem !important; }
@@ -386,7 +385,7 @@
             </video>
 
             <div class="acara-content">
-                <h2 class="judul-section" data-aos="fade-up">Menuju Hari Bahagia</h2>
+                <h2 class="judul-section" data-aos="fade-up" style="margin-top: -40px; margin-bottom: 25px;">Menuju Hari Bahagia</h2>
                 
                 <div class="countdown-container" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="cd-box"><div class="cd-angka" id="hari">00</div><div class="cd-teks">Hari</div></div>
