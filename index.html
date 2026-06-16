@@ -738,14 +738,13 @@
                         spanHadir.innerText = totalHadir;
                         spanTidak.innerText = totalTidak;
 
-                        // --- TAMPILIN MADING ---
+                       // --- TAMPILIN MADING ---
                         data.reverse().forEach(wish => {
-                            const statusClass = wish.hadir === 'Hadir' ? '' : 'tidak';
-                            const badgeText = wish.hadir === 'Hadir' ? 'Hadir' : 'Absen';
+                            const statusClass = wish.hadir === 'Hadir' ? 'hadir' : 'tidak';
+                            const badgeIcon = wish.hadir === 'Hadir' ? '✔' : '✖';
                             displayArea.innerHTML += `
                                 <div class="wish-item">
-                                    <span class="wish-name">${wish.nama}</span>
-                                    <span class="wish-status ${statusClass}">${badgeText}</span>
+                                    <div class="wish-name">${wish.nama} <span class="wish-status ${statusClass}" title="${wish.hadir}">${badgeIcon}</span></div>
                                     <p class="wish-text">"${wish.ucapan}"</p>
                                 </div>
                             `;
