@@ -305,9 +305,10 @@
         /* --- STYLING MADING UCAPAN BARU --- */
         #wishes-display { margin-top: 25px; text-align: left; max-height: 280px; overflow-y: auto; background: rgba(255,255,255,0.6); padding: 15px; border-radius: 8px; display: none; backdrop-filter: blur(5px); }
         .wish-item { background: white; padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid var(--warna-aksen); box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-        .wish-name { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem; color: #333; }
-        .wish-status { font-family: 'Poppins', sans-serif; font-size: 0.7rem; background: #e2f5e3; color: #27ae60; padding: 2px 8px; border-radius: 20px; margin-left: 6px; font-weight: bold; display: inline-block; }
-        .wish-status.tidak { background: #fce4e4; color: #c0392b; }
+        .wish-name { display: flex; align-items: center; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem; color: #333; }
+        .wish-status { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; font-size: 0.6rem; margin-left: 6px; color: white; font-weight: bold; }
+        .wish-status.hadir { background-color: #27ae60; }
+        .wish-status.tidak { background-color: #e74c3c; }
         .wish-text { font-size: 0.9rem; margin-top: 6px; font-style: italic; line-height: 1.4; color: var(--warna-teks); }
 
         /* --- 12. CLOSING --- */
