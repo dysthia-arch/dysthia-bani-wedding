@@ -232,11 +232,16 @@
             -webkit-backdrop-filter: blur(8px); /* Biar jalan mulus di HP iPhone/Safari */
         }
 
-       .teks-pembuka {
+       /* Teks Pembuka (Dikasih efek glow putih biar kebaca di atas video) */
+        .teks-pembuka {
             font-family: 'Poppins', sans-serif;
             font-size: 0.95rem;
             line-height: 1.6;
             color: var(--warna-teks);
+            
+            /* INI KUNCINYA COI: Dorong teksnya ke bawah sejauh 60px */
+            margin-top: 60px; 
+            
             margin-bottom: 30px;
             font-weight: 700;
             text-align: center;
@@ -420,7 +425,7 @@
 
        /* --- RESPONSIVE UNTUK HP --- */
         @media (max-width: 768px) {
-            .profile-content { padding-top: 40px !important; } 
+            .profile-content { padding-top: 80px !important; }
             .acara-content { padding-top: 70px !important; } 
             
             .cover-nama { font-size: 2.5rem !important; }
