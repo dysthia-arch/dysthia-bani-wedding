@@ -214,16 +214,20 @@
             letter-spacing: 1px;
         }
 
-        /* Box Putih Melengkung (Atas Bawah Melengkung) */
+        /* Box Putih Melengkung (Efek Kaca Transparan) */
         .lengkungan-putih {
-            background-color: rgba(252, 252, 252, 0.95); 
+            /* Angka 0.65 di ujung itu tingkat transparansinya (1 = solid, 0 = tembus pandang 100%) */
+            background-color: rgba(252, 252, 252, 0.65); 
             max-width: 400px; 
             width: 100%;
             border-radius: 200px; 
             padding: 60px 25px 70px 25px; 
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            backdrop-filter: blur(5px);
+            
+            /* Ini sihirnya biar tembus pandangnya kayak kaca embun estetik */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px); /* Biar jalan mulus di HP iPhone/Safari */
         }
 
         .teks-pembuka {
