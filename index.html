@@ -201,13 +201,16 @@
 
         /* NAH KODINGAN LU TARUH DI SINI COI */
         .judul-section { 
-            /* Ganti ke font latin sambung yang elegan */
             font-family: 'Pinyon Script', cursive; 
-            font-size: 3.5rem; /* Dibikin lebih gede biar mewah */
+            font-size: 3.5rem; 
             color: var(--warna-aksen); 
             margin-bottom: 25px; 
-            font-weight: normal;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Dikasih bayangan tipis */
+            
+            /* Ini yang bikin tebel coi */
+            font-weight: bold; 
+            -webkit-text-stroke: 0.5px var(--warna-aksen); /* Trik nebelin garis font tipis */
+            
+            text-shadow: 0 2px 10px rgba(0,0,0,0.05); 
             letter-spacing: 1px;
         }
 
