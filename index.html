@@ -198,14 +198,26 @@
             display: flex; 
             justify-content: center;
         }
-        
-        /* Box Putih Melengkung */
+
+        /* NAH KODINGAN LU TARUH DI SINI COI */
+        .judul-section { 
+            /* Ganti ke font latin sambung yang elegan */
+            font-family: 'Pinyon Script', cursive; 
+            font-size: 3.5rem; /* Dibikin lebih gede biar mewah */
+            color: var(--warna-aksen); 
+            margin-bottom: 25px; 
+            font-weight: normal;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Dikasih bayangan tipis */
+            letter-spacing: 1px;
+        }
+
+        /* Box Putih Melengkung (Atas Bawah Melengkung) */
         .lengkungan-putih {
-            background-color: rgba(252, 252, 252, 0.95); /* Agak transparan dikit biar nyatu sama video */
+            background-color: rgba(252, 252, 252, 0.95); 
             max-width: 400px; 
             width: 100%;
-            border-radius: 200px 200px 0 0; 
-            padding: 60px 25px 50px 25px;
+            border-radius: 200px; 
+            padding: 60px 25px 70px 25px; 
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             backdrop-filter: blur(5px);
@@ -399,13 +411,15 @@
        /* --- RESPONSIVE UNTUK HP --- */
         @media (max-width: 768px) {
             .profile-content { padding-top: 40px !important; } 
-            /* NILAI PADDING TOP DIUBAH MENJADI 70px */
             .acara-content { padding-top: 70px !important; } 
             
             .cover-nama { font-size: 2.5rem !important; }
             #hero .cover-nama { font-size: 2.5rem !important; }
             .cover-tamu { font-size: 1.2rem !important; }
-            .judul-section { font-size: 1.6rem !important; }
+            
+            /* INI BAGIAN JUDUL YANG KITA KECILIN DIKIT KHUSUS BUAT LAYAR HP */
+            .judul-section { font-size: 2.8rem !important; margin-bottom: 15px !important; }
+            
             .nama-mempelai { font-size: 2rem !important; }
             #closing h1 { font-size: 2.5rem !important; }
             .hero-tanggal { font-size: 0.9rem !important; }
