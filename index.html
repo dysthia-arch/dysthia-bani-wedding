@@ -195,12 +195,73 @@
             width: 100%;
             padding: 20px 30px 100px 30px; 
             background: transparent; 
+            display: flex; 
+            justify-content: center;
         }
-        .judul-section { font-family: 'Cinzel', serif; font-size: 2rem; color: var(--warna-aksen); margin-bottom: 20px; letter-spacing: 2px; }
         
-        .pengantar { font-size: 1.15rem; line-height: 1.6; margin-bottom: 40px; font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.9); }
-        .nama-mempelai { font-family: 'Pinyon Script', cursive; font-size: 2.8rem; margin-bottom: 5px; font-weight: bold; text-shadow: 0 0 15px rgba(255,255,255,0.9); }
-        .ortu-mempelai { font-family: 'Poppins', sans-serif; font-size: 0.85rem; line-height: 1.6; margin-bottom: 40px; color: #222; font-weight: 700; text-shadow: 0 0 10px rgba(255,255,255,0.9); }
+        /* Box Putih Melengkung */
+        .lengkungan-putih {
+            background-color: rgba(252, 252, 252, 0.95); /* Agak transparan dikit biar nyatu sama video */
+            max-width: 400px; 
+            width: 100%;
+            border-radius: 200px 200px 0 0; 
+            padding: 60px 25px 50px 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            backdrop-filter: blur(5px);
+        }
+
+        .teks-pembuka {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 40px;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        /* Foto Kapsul */
+        .bingkai-foto {
+            width: 160px;
+            height: 220px;
+            margin: 0 auto 20px auto;
+            border-radius: 100px; 
+            border: 2px solid var(--warna-aksen); 
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .bingkai-foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .nama-pengantin {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2.8rem;
+            font-weight: normal;
+            color: var(--warna-aksen);
+            margin: 0 0 10px 0;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .teks-ortu {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 35px;
+            font-weight: 600;
+        }
+
+        .simbol-dan {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--warna-aksen);
+            margin: -15px 0 20px 0;
+        }
 
         /* --- 5. COUNTDOWN --- */
         .countdown-container { display: flex; justify-content: center; gap: 10px; margin: 30px 0; }
@@ -397,18 +458,38 @@
             </video>
 
             <div class="profile-content">
-                <p class="pengantar" data-aos="fade-up" data-aos-duration="1000">Dengan memohon Rahmat dan Ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk menghadiri pernikahan kami:</p>
-                
-                <div data-aos="fade-up" data-aos-duration="1000">
-                    <h3 class="nama-mempelai">Dysthia Dwi Shafira, S.Ars</h3>
-                    <p class="ortu-mempelai">Putri kedua dari Bapak Ir., Agus Suparman <br> & Ibu Siti Nuraeni</p>
-                </div>
+                <div class="lengkungan-putih" data-aos="fade-up" data-aos-duration="1200">
+                    
+                    <p class="teks-pembuka">
+                        Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah semoga ridho-Mu tercurah mengiringi pernikahan kami:
+                    </p>
 
-                <h2 class="judul-section" style="font-size: 1.5rem; margin-bottom: 20px;" data-aos="zoom-in">&</h2>
+                    <div class="profil-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="bingkai-foto">
+                            <img src="foto-dysthia.jpg" alt="Foto Dysthia">
+                        </div>
+                        <h2 class="nama-pengantin">Dysthia Dwi Shafira, S.Ars</h2>
+                        <p class="teks-ortu">
+                            Putri Kedua dari<br>
+                            Bapak Ir. Agus Suparman<br>
+                            & Ibu Siti Nuraeni
+                        </p>
+                    </div>
 
-                <div data-aos="fade-up" data-aos-duration="1000">
-                    <h3 class="nama-mempelai">Bani Adil Insan, S.Kom </h3>
-                    <p class="ortu-mempelai">Putra pertama dari Bapak H. Mohamad Fazri, S.E.<br> & Ibu Hj. Herlina</p>
+                    <div class="simbol-dan" data-aos="fade-up" data-aos-delay="300">&</div>
+
+                    <div class="profil-card" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="bingkai-foto">
+                            <img src="foto-bani.jpg" alt="Foto Bani">
+                        </div>
+                        <h2 class="nama-pengantin">Bani Adil Insan, S.Kom</h2>
+                        <p class="teks-ortu">
+                            Putra Pertama dari<br>
+                            Bapak H. Mohamad Fazri, S.E.<br>
+                            & Ibu Hj. Herlina
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </section>
