@@ -190,13 +190,15 @@
             display: flex;
             align-items: center;
         }
-        .profile-content {
+       .profile-content {
             position: relative; z-index: 2;
             width: 100%;
             padding: 20px 30px 100px 30px; 
             background: transparent; 
             display: flex; 
-            justify-content: center;
+            /* Ini penting coi, biar teks dan kapsul nyusun ke bawah, gak ke samping */
+            flex-direction: column; 
+            align-items: center;
         }
 
         /* NAH KODINGAN LU TARUH DI SINI COI */
@@ -230,16 +232,17 @@
             -webkit-backdrop-filter: blur(8px); /* Biar jalan mulus di HP iPhone/Safari */
         }
 
-        .teks-pembuka {
+       .teks-pembuka {
             font-family: 'Poppins', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             line-height: 1.6;
-            color: #555;
-            margin-bottom: 40px;
-            margin-top: 20px;
-            font-weight: 600;
+            color: var(--warna-teks);
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.8); 
+            max-width: 400px;
         }
-
         /* Foto Kapsul */
         .bingkai-foto {
             width: 160px;
@@ -479,12 +482,13 @@
             </video>
 
             <div class="profile-content">
+                
+                <p class="teks-pembuka" data-aos="fade-up" data-aos-duration="1000">
+                    Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah semoga ridho-Mu tercurah mengiringi pernikahan kami:
+                </p>
+
                 <div class="lengkungan-putih" data-aos="fade-up" data-aos-duration="1200">
                     
-                    <p class="teks-pembuka">
-                        Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah semoga ridho-Mu tercurah mengiringi pernikahan kami:
-                    </p>
-
                     <div class="profil-card" data-aos="zoom-in" data-aos-delay="200">
                         <div class="bingkai-foto">
                             <img src="foto-dysthia.jpg" alt="Foto Dysthia">
@@ -514,7 +518,6 @@
                 </div>
             </div>
         </section>
-
         <section id="acara">
             <video muted playsinline preload="none" class="video-bg-container" id="acara-video">
                 <source src="bg-acara.mp4" type="video/mp4">
