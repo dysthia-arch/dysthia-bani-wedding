@@ -190,11 +190,14 @@
             display: flex;
             align-items: center;
             
-            /* INI OBATNYA COI: Gambarnya dipasang langsung jadi background */
+            /* Settingan Background Gambar */
             background-image: url('bg-profile.jpg');
             background-size: cover;
-            background-position: center; /* Biar fokus gambarnya selalu di tengah */
+            background-position: center; 
             background-repeat: no-repeat;
+            
+            /* 🔥 INI DIA KODE SAKTI PARALLAX-NYA COI 🔥 */
+            background-attachment: fixed; 
         }
        .profile-content {
             position: relative; z-index: 2;
@@ -232,7 +235,7 @@
 
         .teks-pembuka {
             font-family: 'Cormorant Garamond', serif; /* Ini font elegannya coi */
-            font-size: 0.93rem; /* Udah dikecilin dikit dari sebelumnya 0.95rem */
+            font-size: 0.95rem; /* Udah dikecilin dikit dari sebelumnya 0.95rem */
             font-style: italic; /* Dikasih efek miring biar kerasa sakral dan mahal */
             font-weight: 600; /* Ketebalan dikurangin biar gak terlalu ngeblok */
             line-height: 1.6;
