@@ -196,29 +196,23 @@
             padding: 20px 30px 100px 30px; 
             background: transparent; 
             display: flex; 
-            /* Ini penting coi, biar teks dan kapsul nyusun ke bawah, gak ke samping */
             flex-direction: column; 
             align-items: center;
         }
 
-        /* NAH KODINGAN LU TARUH DI SINI COI */
         .judul-section { 
             font-family: 'Pinyon Script', cursive; 
             font-size: 3.5rem; 
             color: var(--warna-aksen); 
             margin-bottom: 25px; 
-            
-            /* Ini yang bikin tebel coi */
             font-weight: bold; 
-            -webkit-text-stroke: 0.5px var(--warna-aksen); /* Trik nebelin garis font tipis */
-            
+            -webkit-text-stroke: 0.5px var(--warna-aksen); 
             text-shadow: 0 2px 10px rgba(0,0,0,0.05); 
             letter-spacing: 1px;
         }
 
-        /* Box Putih Melengkung (Efek Kaca Transparan) */
+        /* Box Putih Melengkung */
         .lengkungan-putih {
-            /* Angka 0.65 di ujung itu tingkat transparansinya (1 = solid, 0 = tembus pandang 100%) */
             background-color: rgba(252, 252, 252, 0.65); 
             max-width: 400px; 
             width: 100%;
@@ -226,29 +220,23 @@
             padding: 60px 25px 70px 25px; 
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            
-            /* Ini sihirnya biar tembus pandangnya kayak kaca embun estetik */
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px); /* Biar jalan mulus di HP iPhone/Safari */
+            -webkit-backdrop-filter: blur(8px); 
         }
 
-       /* Teks Pembuka (Dikasih efek glow putih biar kebaca di atas video) */
         .teks-pembuka {
             font-family: 'Poppins', sans-serif;
             font-size: 0.95rem;
             line-height: 1.6;
             color: var(--warna-teks);
-            
-            /* INI KUNCINYA COI: Dorong teksnya ke bawah sejauh 60px */
             margin-top: 60px; 
-            
             margin-bottom: 30px;
             font-weight: 700;
             text-align: center;
             text-shadow: 0 0 10px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.8); 
             max-width: 400px;
         }
-        /* Foto Kapsul */
+        
         .bingkai-foto {
             width: 160px;
             height: 220px;
@@ -307,7 +295,6 @@
         .acara-content {
             position: relative; z-index: 2;
             width: 100%;
-            /* Benerin posisi biar ke atas tapi gak error - NILAI PADDING TOP DIUBAH MENJADI 80px */
             padding: 80px 30px 100px 30px; 
             background: transparent; 
         }
@@ -432,7 +419,6 @@
             #hero .cover-nama { font-size: 2.5rem !important; }
             .cover-tamu { font-size: 1.2rem !important; }
             
-            /* INI BAGIAN JUDUL YANG KITA KECILIN DIKIT KHUSUS BUAT LAYAR HP */
             .judul-section { font-size: 2.8rem !important; margin-bottom: 15px !important; }
             
             .nama-mempelai { font-size: 2rem !important; }
@@ -458,7 +444,6 @@
     <div class="main-wrapper" id="main-content">
         
         <section id="hero">
-            <!-- INI YANG GUA UBAH COI: Ditambahin 'autoplay loop' -->
             <video autoplay loop muted playsinline preload="auto" class="video-bg-container" id="hero-video">
                 <source src="bg-hero.mp4" type="video/mp4">
             </video>
@@ -483,9 +468,8 @@
         </section>
 
         <section id="profile">
-            <video muted playsinline preload="none" class="video-bg-container" id="profile-video">
-                <source src="bg-profile.mp4" type="video/mp4">
-            </video>
+            <!-- INI YANG GUA UBAH COI: Diganti pakai gambar JPG -->
+            <img src="bg-profile.jpg" class="video-bg-container" alt="Background Profile">
 
             <div class="profile-content">
                 
@@ -738,14 +722,14 @@
         const musik = document.getElementById("bg-music");
         const musicBtn = document.getElementById("music-btn");
         const heroVideo = document.getElementById('hero-video');
-        const profileVideo = document.getElementById('profile-video');
+        
+        // profileVideo dihapus dari sini karena sekarang pakai gambar
         const acaraVideo = document.getElementById('acara-video');
         const galleryVideo = document.getElementById('gallery-video');
         const lovestoryVideo = document.getElementById('lovestory-video');
         const giftVideo = document.getElementById('gift-video'); 
         const closingVideo = document.getElementById('closing-video'); 
         
-        // INI GUA BERSIHIN COI, VARIABEL SENSOR LAMA GUA HAPUS
         let isPlaying = false;
 
         function bukaUndangan() {
@@ -753,7 +737,8 @@
             document.body.style.overflow = "auto"; 
             window.scrollTo(0, 0); 
             
-            const semuaVideo = [heroVideo, profileVideo, acaraVideo, galleryVideo, lovestoryVideo, giftVideo, closingVideo];
+            // profileVideo dihapus dari array ini
+            const semuaVideo = [heroVideo, acaraVideo, galleryVideo, lovestoryVideo, giftVideo, closingVideo];
             semuaVideo.forEach(vid => {
                 let pancingPlay = vid.play();
                 if (pancingPlay !== undefined) {
@@ -768,7 +753,6 @@
             musicBtn.style.display = "flex"; 
         }
 
-        let isProfileStarted = false; 
         let isAcaraStarted = false; 
         let isGalleryStarted = false;
         let isLovestoryStarted = false;
@@ -777,7 +761,7 @@
 
         window.addEventListener('scroll', function() {
             
-            // SENSOR BARU BUAT HERO (Biar otomatis stop pas di-scroll lewatin hero, ngirit batre HP tamu)
+            // SENSOR BUAT HERO
             const rectHero = document.getElementById('hero').getBoundingClientRect();
             if (rectHero.top < window.innerHeight && rectHero.bottom > 0) {
                 heroVideo.play();
@@ -785,10 +769,7 @@
                 heroVideo.pause(); 
             }
 
-            const rectProfile = document.getElementById('profile').getBoundingClientRect();
-            if (rectProfile.top < window.innerHeight && rectProfile.bottom > 0) {
-                if (!isProfileStarted) { profileVideo.play(); isProfileStarted = true; }
-            } else { profileVideo.pause(); isProfileStarted = false; }
+            // SENSOR PROFILE DIHAPUS
 
             const rectAcara = document.getElementById('acara').getBoundingClientRect();
             if (rectAcara.top < window.innerHeight && rectAcara.bottom > 0) {
