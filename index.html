@@ -371,7 +371,14 @@
             min-height: 100vh; 
             display: flex;
             align-items: center;
+            
+            /* LANGSUNG JADIIN BACKGROUND JPG COI */
+            background-image: url('bg-lovestory.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
+
         .lovestory-content {
             position: relative; z-index: 2;
             width: 100%;
@@ -604,25 +611,14 @@
             </div>
         </section>
         <section id="lovestory">
-            <video muted playsinline preload="none" class="video-bg-container" id="lovestory-video">
-                <source src="bg-lovestory.mp4" type="video/mp4">
-            </video>
-
             <div class="lovestory-content">
                 <h2 class="judul-section" data-aos="fade-up">Love Story</h2>
                 
                 <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
-                    <p class="story-title">Pertemuan Kembali</p>
+                    <p class="story-title">Januari 2018</p>
                     <p class="story-desc">Setelah sekian lama tidak bertemu sejak lulus SMA, kami kembali dipertemukan di tahun 2018. Berawal dari saling berbagi cerita dan pengalaman yang serupa, kami semakin dekat hingga akhirnya memutuskan untuk menjalani perjalanan bersama.</p>
                 </div>
-                <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
-                    <p class="story-title">Relationship</p>
-                    <p class="story-desc">Setelah melewati berbagai cerita dan tumbuh bersama selama bertahun-tahun, kami memutuskan untuk melangkah ke jenjang yang lebih serius. Dengan penuh kebahagiaan, kami mempertemukan kedua keluarga untuk membicarakan masa depan kami bersama.</p>
-                </div>
-                <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
-                    <p class="story-title">Married</p>
-                    <p class="story-desc">kedua keluarga kembali dipertemukan dalam suasana yang hangat dan penuh keakraban. Dari pertemuan tersebut, kami menetapkan tanggal 2 Agustus 2026 sebagai hari untuk mengikat janji suci dan memulai babak baru kehidupan kami.</p>
-                </div>
+                <!-- dan seterusnya biarin aja -->
             </div>
         </section>
 
@@ -754,7 +750,6 @@
         
         // Cuma ngambil video yang beneran masih ada di HTML lu
         const heroVideo = document.getElementById('hero-video');
-        const lovestoryVideo = document.getElementById('lovestory-video');
         const giftVideo = document.getElementById('gift-video'); 
         const closingVideo = document.getElementById('closing-video'); 
         
@@ -765,7 +760,7 @@
             document.body.style.overflow = "auto"; 
             window.scrollTo(0, 0); 
             
-            const semuaVideo = [heroVideo, lovestoryVideo, giftVideo, closingVideo];
+            const semuaVideo = [heroVideo, giftVideo, closingVideo];
             
             semuaVideo.forEach(vid => {
                 // Trik Anti-Badai: Dicek dulu videonya ada apa enggak, biar gak error
@@ -800,14 +795,6 @@
                 if(heroVideo) heroVideo.play();
             } else { 
                 if(heroVideo) heroVideo.pause(); 
-            }
-
-            // SENSOR LOVESTORY
-            if(lovestoryVideo) {
-                const rectLovestory = document.getElementById('lovestory').getBoundingClientRect();
-                if (rectLovestory.top < window.innerHeight && rectLovestory.bottom > 0) {
-                    if (!isLovestoryStarted) { lovestoryVideo.play(); isLovestoryStarted = true; }
-                } else { lovestoryVideo.pause(); isLovestoryStarted = false; }
             }
 
             // SENSOR GIFT
