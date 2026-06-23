@@ -315,9 +315,17 @@
             min-height: 100vh; 
             display: flex;
             align-items: center;
+            
+            /* LANGSUNG JADIIN BACKGROUND JPG BIASA COI */
+            background-image: url('bg-acara.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
+
         .acara-content {
-            position: relative; z-index: 2;
+            position: relative; 
+            z-index: 2; 
             width: 100%;
             padding: 80px 30px 100px 30px; 
             background: transparent; 
@@ -531,10 +539,6 @@
             </div>
         </section>
         <section id="acara">
-            <video muted playsinline preload="none" class="video-bg-container" id="acara-video">
-                <source src="bg-acara.mp4" type="video/mp4">
-            </video>
-
             <div class="acara-content">
                 <h2 class="judul-section" data-aos="fade-up" style="margin-bottom: 25px;">Menuju Hari Bahagia</h2>
                 
