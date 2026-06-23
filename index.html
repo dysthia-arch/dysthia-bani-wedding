@@ -347,7 +347,14 @@
             min-height: 100vh; 
             display: flex;
             align-items: center;
+            
+            /* LANGSUNG JADIIN BACKGROUND JPG COI */
+            background-image: url('bg-gallery.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
+
         .gallery-content {
             position: relative; z-index: 2;
             width: 100%;
@@ -578,10 +585,10 @@
         </section>
 
         <section id="gallery">
-            <video muted playsinline preload="none" class="video-bg-container" id="gallery-video">
-                <source src="bg-gallery.mp4" type="video/mp4">
-            </video>
-
+            <div class="gallery-content">
+                <h2 class="judul-section" data-aos="fade-up">Gallery</h2>
+                <div class="gallery-grid">
+                    <!-- Isian foto-foto lu biarin aja tetep sama -->
             <div class="gallery-content">
                 <h2 class="judul-section" data-aos="fade-up">Gallery</h2>
                 <div class="gallery-grid">
@@ -750,7 +757,6 @@
         
         // Cuma ngambil video yang beneran masih ada di HTML lu
         const heroVideo = document.getElementById('hero-video');
-        const galleryVideo = document.getElementById('gallery-video');
         const lovestoryVideo = document.getElementById('lovestory-video');
         const giftVideo = document.getElementById('gift-video'); 
         const closingVideo = document.getElementById('closing-video'); 
@@ -762,7 +768,7 @@
             document.body.style.overflow = "auto"; 
             window.scrollTo(0, 0); 
             
-            const semuaVideo = [heroVideo, galleryVideo, lovestoryVideo, giftVideo, closingVideo];
+            const semuaVideo = [heroVideo, lovestoryVideo, giftVideo, closingVideo];
             
             semuaVideo.forEach(vid => {
                 // Trik Anti-Badai: Dicek dulu videonya ada apa enggak, biar gak error
@@ -797,14 +803,6 @@
                 if(heroVideo) heroVideo.play();
             } else { 
                 if(heroVideo) heroVideo.pause(); 
-            }
-
-            // SENSOR GALLERY
-            if(galleryVideo) {
-                const rectGallery = document.getElementById('gallery').getBoundingClientRect();
-                if (rectGallery.top < window.innerHeight && rectGallery.bottom > 0) {
-                    if (!isGalleryStarted) { galleryVideo.play(); isGalleryStarted = true; }
-                } else { galleryVideo.pause(); isGalleryStarted = false; }
             }
 
             // SENSOR LOVESTORY
