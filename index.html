@@ -458,7 +458,8 @@
     <div class="main-wrapper" id="main-content">
         
         <section id="hero">
-            <video muted playsinline preload="auto" class="video-bg-container" id="hero-video">
+            <!-- INI YANG GUA UBAH COI: Ditambahin 'autoplay loop' -->
+            <video autoplay loop muted playsinline preload="auto" class="video-bg-container" id="hero-video">
                 <source src="bg-hero.mp4" type="video/mp4">
             </video>
 
@@ -730,7 +731,6 @@
                 teksInstruksi.innerText = "* QR Code hanya tersedia melalui link undangan personal.";
             }
 
-            // Langsung panggil list mading ucapan pas web pertama kali dimuat
             loadWishes();
         };
 
@@ -745,19 +745,14 @@
         const giftVideo = document.getElementById('gift-video'); 
         const closingVideo = document.getElementById('closing-video'); 
         
+        // INI GUA BERSIHIN COI, VARIABEL SENSOR LAMA GUA HAPUS
         let isPlaying = false;
-        let isOpeningDone = false; 
-
-        heroVideo.onended = function() {
-            isOpeningDone = true;
-        };
 
         function bukaUndangan() {
             document.getElementById('cover-overlay').classList.add('hide-cover');
             document.body.style.overflow = "auto"; 
             window.scrollTo(0, 0); 
             
-            // Trigger 7 Video sekaligus
             const semuaVideo = [heroVideo, profileVideo, acaraVideo, galleryVideo, lovestoryVideo, giftVideo, closingVideo];
             semuaVideo.forEach(vid => {
                 let pancingPlay = vid.play();
@@ -773,7 +768,6 @@
             musicBtn.style.display = "flex"; 
         }
 
-        let isHeroScrolling;
         let isProfileStarted = false; 
         let isAcaraStarted = false; 
         let isGalleryStarted = false;
@@ -782,11 +776,13 @@
         let isClosingStarted = false;
 
         window.addEventListener('scroll', function() {
-            if (isOpeningDone) {
-                if(heroVideo.ended) { heroVideo.currentTime = 0; }
+            
+            // SENSOR BARU BUAT HERO (Biar otomatis stop pas di-scroll lewatin hero, ngirit batre HP tamu)
+            const rectHero = document.getElementById('hero').getBoundingClientRect();
+            if (rectHero.top < window.innerHeight && rectHero.bottom > 0) {
                 heroVideo.play();
-                clearTimeout(isHeroScrolling);
-                isHeroScrolling = setTimeout(function() { heroVideo.pause(); }, 150);
+            } else { 
+                heroVideo.pause(); 
             }
 
             const rectProfile = document.getElementById('profile').getBoundingClientRect();
@@ -809,13 +805,11 @@
                 if (!isLovestoryStarted) { lovestoryVideo.play(); isLovestoryStarted = true; }
             } else { lovestoryVideo.pause(); isLovestoryStarted = false; }
 
-            // Trigger scroll untuk video Gift
             const rectGift = document.getElementById('gift').getBoundingClientRect();
             if (rectGift.top < window.innerHeight && rectGift.bottom > 0) {
                 if (!isGiftStarted) { giftVideo.play(); isGiftStarted = true; }
             } else { giftVideo.pause(); isGiftStarted = false; }
 
-            // Trigger scroll untuk video Closing
             const rectClosing = document.getElementById('closing').getBoundingClientRect();
             if (rectClosing.top < window.innerHeight && rectClosing.bottom > 0) {
                 if (!isClosingStarted) { closingVideo.play(); isClosingStarted = true; }
@@ -841,14 +835,12 @@
                         displayArea.innerHTML = '';
                         displayArea.style.display = 'block';
 
-                        // --- LOGIKA HITUNG DUA KOTAK ---
                         let totalHadir = data.filter(item => item.hadir === 'Hadir').length;
                         let totalTidak = data.filter(item => item.hadir === 'Tidak Hadir').length;
                         
                         spanHadir.innerText = totalHadir;
                         spanTidak.innerText = totalTidak;
 
-                       // --- TAMPILIN MADING ---
                         data.reverse().forEach(wish => {
                             const statusClass = wish.hadir === 'Hadir' ? 'hadir' : 'tidak';
                             const badgeIcon = wish.hadir === 'Hadir' ? '✔' : '✖';
@@ -885,10 +877,9 @@
                     document.getElementById('rsvp-ucapan').value = ''; 
                     btn.innerText = "Kirim Konfirmasi";
                     btn.disabled = false;
-                    loadWishes(); // Refresh mading biar ucapan barunya langsung muncul
+                    loadWishes(); 
                 })
                 .catch(err => {
-                    // Penyelamat jika terjadi masalah CORS redirect di Google Apps Script
                     alert("Terima kasih! Konfirmasi dan ucapan Anda berhasil disimpan.");
                     document.getElementById('rsvp-ucapan').value = '';
                     btn.innerText = "Kirim Konfirmasi";
