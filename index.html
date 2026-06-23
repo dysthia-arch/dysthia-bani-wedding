@@ -747,10 +747,9 @@
         // --- MANAGEMENT MUSIK & VIDEO ---
         const musik = document.getElementById("bg-music");
         const musicBtn = document.getElementById("music-btn");
-        const heroVideo = document.getElementById('hero-video');
         
-        // profileVideo dihapus dari sini karena sekarang pakai gambar
-        const acaraVideo = document.getElementById('acara-video');
+        // Cuma ngambil video yang beneran masih ada di HTML lu
+        const heroVideo = document.getElementById('hero-video');
         const galleryVideo = document.getElementById('gallery-video');
         const lovestoryVideo = document.getElementById('lovestory-video');
         const giftVideo = document.getElementById('gift-video'); 
@@ -763,23 +762,28 @@
             document.body.style.overflow = "auto"; 
             window.scrollTo(0, 0); 
             
-            // profileVideo dihapus dari array ini
-            const semuaVideo = [heroVideo, acaraVideo, galleryVideo, lovestoryVideo, giftVideo, closingVideo];
+            const semuaVideo = [heroVideo, galleryVideo, lovestoryVideo, giftVideo, closingVideo];
+            
             semuaVideo.forEach(vid => {
-                let pancingPlay = vid.play();
-                if (pancingPlay !== undefined) {
-                    pancingPlay.then(() => {
-                        if (vid !== heroVideo) { vid.pause(); }
-                    }).catch(err => { console.log("Video nyangkut:", err); });
+                // Trik Anti-Badai: Dicek dulu videonya ada apa enggak, biar gak error
+                if(vid) {
+                    let pancingPlay = vid.play();
+                    if (pancingPlay !== undefined) {
+                        pancingPlay.then(() => {
+                            if (vid !== heroVideo) { vid.pause(); }
+                        }).catch(err => { console.log("Video nyangkut:", err); });
+                    }
                 }
             });
 
-            musik.play();
-            isPlaying = true;
-            musicBtn.style.display = "flex"; 
+            // Musik pasti nyala karena gak keganggu error video lagi
+            if(musik) {
+                musik.play();
+                isPlaying = true;
+                musicBtn.style.display = "flex"; 
+            }
         }
 
-        let isAcaraStarted = false; 
         let isGalleryStarted = false;
         let isLovestoryStarted = false;
         let isGiftStarted = false;
@@ -787,46 +791,53 @@
 
         window.addEventListener('scroll', function() {
             
-            // SENSOR BUAT HERO
+            // SENSOR HERO
             const rectHero = document.getElementById('hero').getBoundingClientRect();
             if (rectHero.top < window.innerHeight && rectHero.bottom > 0) {
-                heroVideo.play();
+                if(heroVideo) heroVideo.play();
             } else { 
-                heroVideo.pause(); 
+                if(heroVideo) heroVideo.pause(); 
             }
 
-            // SENSOR PROFILE DIHAPUS
+            // SENSOR GALLERY
+            if(galleryVideo) {
+                const rectGallery = document.getElementById('gallery').getBoundingClientRect();
+                if (rectGallery.top < window.innerHeight && rectGallery.bottom > 0) {
+                    if (!isGalleryStarted) { galleryVideo.play(); isGalleryStarted = true; }
+                } else { galleryVideo.pause(); isGalleryStarted = false; }
+            }
 
-            const rectAcara = document.getElementById('acara').getBoundingClientRect();
-            if (rectAcara.top < window.innerHeight && rectAcara.bottom > 0) {
-                if (!isAcaraStarted) { acaraVideo.play(); isAcaraStarted = true; }
-            } else { acaraVideo.pause(); isAcaraStarted = false; }
+            // SENSOR LOVESTORY
+            if(lovestoryVideo) {
+                const rectLovestory = document.getElementById('lovestory').getBoundingClientRect();
+                if (rectLovestory.top < window.innerHeight && rectLovestory.bottom > 0) {
+                    if (!isLovestoryStarted) { lovestoryVideo.play(); isLovestoryStarted = true; }
+                } else { lovestoryVideo.pause(); isLovestoryStarted = false; }
+            }
 
-            const rectGallery = document.getElementById('gallery').getBoundingClientRect();
-            if (rectGallery.top < window.innerHeight && rectGallery.bottom > 0) {
-                if (!isGalleryStarted) { galleryVideo.play(); isGalleryStarted = true; }
-            } else { galleryVideo.pause(); isGalleryStarted = false; }
+            // SENSOR GIFT
+            if(giftVideo) {
+                const rectGift = document.getElementById('gift').getBoundingClientRect();
+                if (rectGift.top < window.innerHeight && rectGift.bottom > 0) {
+                    if (!isGiftStarted) { giftVideo.play(); isGiftStarted = true; }
+                } else { giftVideo.pause(); isGiftStarted = false; }
+            }
 
-            const rectLovestory = document.getElementById('lovestory').getBoundingClientRect();
-            if (rectLovestory.top < window.innerHeight && rectLovestory.bottom > 0) {
-                if (!isLovestoryStarted) { lovestoryVideo.play(); isLovestoryStarted = true; }
-            } else { lovestoryVideo.pause(); isLovestoryStarted = false; }
-
-            const rectGift = document.getElementById('gift').getBoundingClientRect();
-            if (rectGift.top < window.innerHeight && rectGift.bottom > 0) {
-                if (!isGiftStarted) { giftVideo.play(); isGiftStarted = true; }
-            } else { giftVideo.pause(); isGiftStarted = false; }
-
-            const rectClosing = document.getElementById('closing').getBoundingClientRect();
-            if (rectClosing.top < window.innerHeight && rectClosing.bottom > 0) {
-                if (!isClosingStarted) { closingVideo.play(); isClosingStarted = true; }
-            } else { closingVideo.pause(); isClosingStarted = false; }
+            // SENSOR CLOSING
+            if(closingVideo) {
+                const rectClosing = document.getElementById('closing').getBoundingClientRect();
+                if (rectClosing.top < window.innerHeight && rectClosing.bottom > 0) {
+                    if (!isClosingStarted) { closingVideo.play(); isClosingStarted = true; }
+                } else { closingVideo.pause(); isClosingStarted = false; }
+            }
         });
 
         function toggleMusic() {
-            if (isPlaying) { musik.pause(); musicBtn.innerText = "🔇"; } 
-            else { musik.play(); musicBtn.innerText = "🎵"; }
-            isPlaying = !isPlaying;
+            if(musik) {
+                if (isPlaying) { musik.pause(); musicBtn.innerText = "🔇"; } 
+                else { musik.play(); musicBtn.innerText = "🎵"; }
+                isPlaying = !isPlaying;
+            }
         }
 
         // --- SISTEM MEMUAT UCAPAN DI WEB (MADING) ---
