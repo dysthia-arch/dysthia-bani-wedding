@@ -190,17 +190,31 @@
             display: flex;
             align-items: center;
             
-            /* Settingan Background Gambar */
+            /* KUNCI PERTAMA: Kurung gambarnya biar gak luber ke halaman lain */
+            clip-path: inset(0 0 0 0); 
+            background: transparent;
+        }
+
+        /* KUNCI KEDUA: Ini settingan gambar parallax khusus iPhone & Android */
+        .parallax-bg {
+            position: fixed; /* Dipaku ke layar biar diem */
+            top: 0; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px; /* Dikunci biar pas sama ukuran wrapper undangan lu */
+            height: 100vh;
             background-image: url('bg-profile.jpg');
             background-size: cover;
-            background-position: center; 
+            background-position: center;
             background-repeat: no-repeat;
-            
-            /* 🔥 INI DIA KODE SAKTI PARALLAX-NYA COI 🔥 */
-            background-attachment: fixed; 
+            z-index: 1; /* Berada di bawah teks */
+            pointer-events: none;
         }
-       .profile-content {
-            position: relative; z-index: 2;
+
+        .profile-content {
+            position: relative; 
+            z-index: 2; /* Harus lebih tinggi dari .parallax-bg biar teksnya gak kelelep */
             width: 100%;
             padding: 20px 30px 100px 30px; 
             background: transparent; 
@@ -478,8 +492,9 @@
         </section>
 
         <section id="profile">
+            <div class="parallax-bg"></div>
+
             <div class="profile-content">
-                
                 <p class="teks-pembuka" data-aos="fade-up" data-aos-duration="1000">
                     Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah semoga ridho-Mu tercurah mengiringi pernikahan kami:
                 </p>
