@@ -524,56 +524,47 @@
         .btn-kirim { padding: 12px; background: var(--warna-aksen); color: white; border: none; border-radius: 5px; font-family: 'Poppins', sans-serif; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .btn-kirim:hover { background: #b5952f; }
 
-        /* --- MADING UCAPAN BARU --- */
+        /* --- MADING UCAPAN ORIGINAL (TANPA ITALIC & PAKE PAGE) --- */
         #wishes-display { 
             margin-top: 25px; 
             text-align: left; 
+            background: rgba(255,255,255,0.1); 
+            padding: 15px; 
+            border-radius: 8px; 
             display: none; 
-            /* max-height dan overflow-y dihapus karena kita pakai halaman sekarang */
+            border: 1px solid rgba(255,255,255,0.2); 
         }
-        
-        .wish-item { 
-            background: linear-gradient(145deg, rgba(250, 248, 245, 0.95), rgba(255, 255, 255, 0.8)); 
-            padding: 18px 20px; 
-            border-radius: 12px; 
-            margin-bottom: 15px; 
-            border: 1px solid rgba(212, 175, 55, 0.3); 
-            border-left: 5px solid var(--warna-aksen); 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
-            color: var(--warna-teks-gelap); 
-        }
-
-        .wish-name { 
-            display: flex; 
-            align-items: center; 
-            font-family: 'Poppins', sans-serif; 
-            font-weight: 700; 
-            font-size: 0.95rem; 
-            color: var(--warna-bg); 
-            margin-bottom: 5px;
-        }
-
-        .wish-status { 
-            display: inline-flex; 
-            align-items: center; 
-            justify-content: center; 
-            width: 16px; 
-            height: 16px; 
-            border-radius: 50%; 
-            font-size: 0.65rem; 
-            margin-left: 8px; 
-            color: white; 
-            font-weight: bold; 
-        }
+        .wish-item { background: rgba(250, 248, 245, 0.95); padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid var(--warna-aksen); box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: var(--warna-teks-gelap); }
+        .wish-name { display: flex; align-items: center; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem; color: #2c3e50; }
+        .wish-status { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; font-size: 0.6rem; margin-left: 6px; color: white; font-weight: bold; }
         .wish-status.hadir { background-color: #27ae60; }
         .wish-status.tidak { background-color: #e74c3c; }
+        .wish-text { font-size: 0.9rem; margin-top: 6px; font-style: normal; line-height: 1.4; color: #4a4a4a; } /* font-style: normal biar gak miring */
 
-        .wish-text { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: 1.15rem; 
-            font-style: normal; /* Sengaja dibikin gak miring (normal) */
-            line-height: 1.5; 
-            color: #333333; 
+        /* --- CSS TOMBOL HALAMAN --- */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .btn-page {
+            padding: 5px 10px;
+            background: rgba(255,255,255,0.1);
+            color: var(--warna-teks);
+            border: 1px solid var(--warna-aksen);
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        .btn-page:hover, .btn-page.active {
+            background: var(--warna-aksen);
+            color: white;
+            border-color: var(--warna-aksen);
         }
 
         /* --- CSS TOMBOL HALAMAN (PAGINATION) --- */
@@ -999,7 +990,11 @@
             }
         }
 
-        // --- SISTEM MEMUAT UCAPAN DI WEB (MADING) ---
+        // --- SISTEM MEMUAT UCAPAN DI WEB (MADING) DENGAN HALAMAN ---
+        var allWishes = [];
+        var currentPage = 1;
+        var wishesPerPage = 5; // Maksimal nampilin 5 ucapan per halaman
+
         function loadWishes() {
             const displayArea = document.getElementById('wishes-display');
             const spanHadir = document.getElementById('jumlah-hadir');
@@ -1009,7 +1004,6 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data && data.length > 0) {
-                        displayArea.innerHTML = '';
                         displayArea.style.display = 'block';
 
                         let totalHadir = data.filter(item => item.hadir === 'Hadir').length;
@@ -1018,19 +1012,59 @@
                         spanHadir.innerText = totalHadir;
                         spanTidak.innerText = totalTidak;
 
-                        data.reverse().forEach(wish => {
-                            const statusClass = wish.hadir === 'Hadir' ? 'hadir' : 'tidak';
-                            const badgeIcon = wish.hadir === 'Hadir' ? '✔' : '✖';
-                            displayArea.innerHTML += `
-                                <div class="wish-item">
-                                    <div class="wish-name">${wish.nama} <span class="wish-status ${statusClass}" title="${wish.hadir}">${badgeIcon}</span></div>
-                                    <p class="wish-text">"${wish.ucapan}"</p>
-                                </div>
-                            `;
-                        });
+                        allWishes = data.reverse(); // Data terbaru di atas
+                        renderWishes(1); // Load halaman pertama
                     }
                 })
                 .catch(err => console.log("Gagal memuat mading:", err));
+        }
+
+        function renderWishes(page) {
+            currentPage = page;
+            const displayArea = document.getElementById('wishes-display');
+            let paginationArea = document.getElementById('pagination-area');
+            
+            // Pengaman: Kalo HTML div pagination-area gak ada, JS otomatis bikinin
+            if (!paginationArea) {
+                paginationArea = document.createElement('div');
+                paginationArea.id = 'pagination-area';
+                paginationArea.className = 'pagination-container';
+                // Masukin setelah kotak wishes-display
+                displayArea.parentNode.insertBefore(paginationArea, displayArea.nextSibling);
+            }
+
+            displayArea.innerHTML = '';
+            paginationArea.innerHTML = '';
+
+            // Hitung batasan yang mau ditampilin (per 5 ucapan)
+            const startIndex = (page - 1) * wishesPerPage;
+            const endIndex = startIndex + wishesPerPage;
+            const wishesToShow = allWishes.slice(startIndex, endIndex);
+
+            wishesToShow.forEach(wish => {
+                const statusClass = wish.hadir === 'Hadir' ? 'hadir' : 'tidak';
+                const badgeIcon = wish.hadir === 'Hadir' ? '✔' : '✖';
+                displayArea.innerHTML += `
+                    <div class="wish-item">
+                        <div class="wish-name">${wish.nama} <span class="wish-status ${statusClass}" title="${wish.hadir}">${badgeIcon}</span></div>
+                        <p class="wish-text">"${wish.ucapan}"</p>
+                    </div>
+                `;
+            });
+
+            // Bikin tombol angka halamannya
+            const totalPages = Math.ceil(allWishes.length / wishesPerPage);
+            if (totalPages > 1) {
+                for (let i = 1; i <= totalPages; i++) {
+                    const btn = document.createElement('button');
+                    btn.className = `btn-page ${i === page ? 'active' : ''}`;
+                    btn.innerText = i;
+                    btn.onclick = () => {
+                        renderWishes(i);
+                    };
+                    paginationArea.appendChild(btn);
+                }
+            }
         }
 
         // --- SISTEM KIRIM RSVP OTOMATIS KE GOOGLE SHEETS ---
