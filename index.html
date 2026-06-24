@@ -315,11 +315,10 @@
             min-height: 100vh; 
             display: flex;
             align-items: center;
-            clip-path: inset(0 0 0 0); /* Sama kaya style di profil biar gak luber / zoom out */
+            clip-path: inset(0 0 0 0); 
             background: transparent;
         }
 
-        /* Parallax background dibikin sama kaya profil */
         .parallax-bg-acara {
             position: fixed;
             top: 0; 
@@ -363,72 +362,107 @@
         .btn-maps { display: inline-block; padding: 10px 25px; background: white; border: 1px solid var(--warna-aksen); color: #b5952f; text-decoration: none; font-family: 'Poppins', sans-serif; font-size: 0.8rem; border-radius: 30px; transition: 0.3s; margin-top: 10px; font-weight: bold; }
         .btn-maps:hover { background: var(--warna-aksen); color: white; }
 
-        /* QR Container dipindah masuk ke acara, border dikasih aksen emas biar cakep */
         .qr-container { background: rgba(250, 248, 245, 0.95); padding: 20px; border-radius: 10px; border-top: 4px solid var(--warna-aksen); box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin: 0 auto 15px auto; display: none; width: fit-content; color: var(--warna-teks-gelap); }
         #qr-image { width: 160px; height: 160px; }
 
-        /* --- 8. GALLERY --- */
-        #gallery {
+        /* --- 7 & 8. GALLERY DAN LOVE STORY (GABUNGAN) --- */
+        #gallery-story {
             position: relative;
             padding: 0; 
             min-height: 100vh; 
             display: flex;
             align-items: center;
-            background-image: url('bg-gallery.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        
-        #gallery::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(11, 19, 37, 0.8); 
-            z-index: 1; 
+            clip-path: inset(0 0 0 0); /* Biar efek parallax gak lari ke section lain */
+            background: transparent;
         }
 
-        .gallery-content {
-            position: relative; z-index: 2;
+        .parallax-bg-story {
+            position: fixed;
+            top: 0; 
+            left: 50%;
+            transform: translateX(-50%);
             width: 100%;
-            padding: 100px 30px; 
-            background: transparent; 
-        }
-        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
-        .gallery-item { width: 100%; height: 280px; background-color: #ddd; background-size: cover; background-position: center; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid rgba(212, 175, 55, 0.3); }
-
-        /* --- 9. LOVE STORY --- */
-        #lovestory {
-            position: relative;
-            padding: 0; 
-            min-height: 100vh; 
-            display: flex;
-            align-items: center;
+            max-width: 500px; 
+            height: 100vh;
+            /* Kita pake bg lovestory buat jadi background utama gabungannya */
             background-image: url('bg-lovestory.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            z-index: 1; 
+            pointer-events: none;
         }
-        
-        #lovestory::before {
+
+        #gallery-story::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(11, 19, 37, 0.8); 
-            z-index: 1; 
+            background: rgba(11, 19, 37, 0.4); 
+            z-index: 1;
+            pointer-events: none;
         }
 
-        .lovestory-content {
+        .gallery-story-content {
             position: relative; z-index: 2;
             width: 100%;
             padding: 100px 30px; 
             background: transparent; 
         }
-        .story-item { text-align: left; background: rgba(250, 248, 245, 0.95); padding: 20px; border-radius: 8px; border-left: 4px solid var(--warna-aksen); margin-bottom: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); color: var(--warna-teks-gelap); }
-        .story-title { font-family: 'Cinzel', serif; font-weight: bold; margin-bottom: 5px; color: var(--warna-bg); } 
+
+        /* Styling buat Gallery Grid */
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; margin-bottom: 80px; }
+        .gallery-item { width: 100%; height: 280px; background-color: #ddd; background-size: cover; background-position: center; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid rgba(212, 175, 55, 0.3); }
+
+        /* Styling buat Love Story Timeline (Garis Waktu) */
+        .timeline {
+            position: relative;
+            padding-left: 30px; /* Jarak biar kotaknya gak nabrak garis */
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        /* Ini Garis Emasnya */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            bottom: 10px;
+            left: 8px; /* Posisi garis di kiri */
+            width: 3px;
+            background: var(--warna-aksen);
+            border-radius: 5px;
+        }
+
+        .story-item { 
+            position: relative; 
+            background: rgba(250, 248, 245, 0.95); 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+            color: var(--warna-teks-gelap); 
+            margin-bottom: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+
+        /* Ini Titik Emas Bulat di atas Garis */
+        .story-item::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: -32px; /* Posisi titik pas di atas garis emas */
+            width: 18px;
+            height: 18px;
+            background: var(--warna-aksen);
+            border-radius: 50%;
+            border: 4px solid var(--warna-bg); /* Kasih pinggiran navy biar titiknya pop-out */
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .story-title { font-family: 'Cinzel', serif; font-weight: bold; margin-bottom: 8px; color: var(--warna-bg); font-size: 1.1rem; } 
         .story-desc { font-size: 0.95rem; line-height: 1.6; }
 
-        /* --- 10. WEDDING GIFT --- */
+        /* --- 9. WEDDING GIFT --- */
         #gift {
             position: relative;
             padding: 0; 
@@ -455,7 +489,7 @@
         .btn-copy { padding: 8px 15px; background: var(--warna-bg); color: white; border: none; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 0.7rem; cursor: pointer; margin-top: 10px; transition: 0.2s; border: 1px solid var(--warna-bg); }
         .btn-copy:hover { background: transparent; color: var(--warna-bg); }
 
-        /* --- 11. WISHES & RSVP --- */
+        /* --- 10. WISHES & RSVP --- */
         #rsvp { background-color: var(--warna-kertas); }
         .rsvp-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; text-align: left; }
         .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; background: rgba(255,255,255,0.95); color: var(--warna-teks-gelap); }
@@ -471,7 +505,7 @@
         .wish-status.tidak { background-color: #e74c3c; }
         .wish-text { font-size: 0.9rem; margin-top: 6px; font-style: italic; line-height: 1.4; color: #4a4a4a; }
 
-        /* --- 12. CLOSING --- */
+        /* --- 11. CLOSING --- */
         #closing { 
             position: relative;
             padding: 0; 
@@ -592,7 +626,6 @@
             </div>
         </section>
         
-        <!-- BAGIAN ACARA & QR CODE SEKARANG DIGABUNG DI SINI -->
         <section id="acara">
             <div class="parallax-bg-acara"></div>
 
@@ -620,7 +653,6 @@
                     <a href="https://maps.app.goo.gl/uehXFWh6AUnTRFzc8" target="_blank" class="btn-maps">Lokasi Acara</a>
                 </div>
 
-                <!-- Bagian Akses Masuk gabung ke bawahnya -->
                 <div data-aos="zoom-in" data-aos-duration="1000" style="margin-top: 40px; width: 100%;">
                     <h2 class="judul-section" style="font-size: 2.5rem; margin-bottom: 10px;">Akses Masuk</h2>
                     <p style="font-size: 1rem; margin-bottom: 20px; color: var(--warna-teks); text-shadow: 0 2px 5px rgba(0,0,0,0.8);">Tunjukkan QR Code ini kepada penerima tamu sebagai akses masuk ke lokasi acara.</p>
@@ -634,10 +666,13 @@
             </div>
         </section>
 
-        <section id="gallery">
-            <div class="gallery-content">
+        <!-- SECTION GABUNGAN: GALLERY & LOVE STORY TIMELINE -->
+        <section id="gallery-story">
+            <div class="parallax-bg-story"></div>
+
+            <div class="gallery-story-content">
+                <!-- Bagian Gallery -->
                 <h2 class="judul-section" data-aos="fade-up">Gallery</h2>
-                
                 <div class="gallery-grid">
                     <div class="gallery-item" style="background-image: url('galeri1.jpg');" data-aos="zoom-in"></div>
                     <div class="gallery-item" style="background-image: url('galeri2.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
@@ -650,27 +685,27 @@
                     <div class="gallery-item" style="background-image: url('galeri9.jpg');" data-aos="zoom-in"></div>
                     <div class="gallery-item" style="background-image: url('galeri10.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
                 </div>
-            </div>
-        </section>
-        
-        <section id="lovestory">
-            <div class="lovestory-content">
-                <div class="kaca-lovestory" data-aos="zoom-in" data-aos-duration="1000">
-                    <h2 class="judul-section">Love Story</h2>
+
+                <!-- Bagian Love Story Timeline -->
+                <h2 class="judul-section" data-aos="fade-up">Love Story</h2>
                 
-                <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
-                    <p class="story-title">Pertemuan kembali</p>
-                    <p class="story-desc">Setelah sekian lama tidak bertemu sejak lulus SMA, kami kembali dipertemukan di tahun 2018. Berawal dari saling berbagi cerita dan pengalaman yang serupa, kami semakin dekat hingga akhirnya memutuskan untuk menjalani perjalanan bersama.</p>
+                <div class="timeline" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="story-item" data-aos="fade-right" data-aos-duration="1000">
+                        <p class="story-title">Pertemuan kembali</p>
+                        <p class="story-desc">Setelah sekian lama tidak bertemu sejak lulus SMA, kami kembali dipertemukan di tahun 2018. Berawal dari saling berbagi cerita dan pengalaman yang serupa, kami semakin dekat hingga akhirnya memutuskan untuk menjalani perjalanan bersama.</p>
+                    </div>
+                    
+                    <div class="story-item" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="150">
+                        <p class="story-title">Relationship</p>
+                        <p class="story-desc">Setelah melewati berbagai cerita dan tumbuh bersama selama bertahun-tahun, kami memutuskan untuk melangkah ke jenjang yang lebih serius. Dengan penuh kebahagiaan, kami mempertemukan kedua keluarga untuk membicarakan masa depan kami bersama.</p>
+                    </div>
+                    
+                    <div class="story-item" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300">
+                        <p class="story-title">Married</p>
+                        <p class="story-desc">Kedua keluarga kembali dipertemukan dalam suasana yang hangat dan penuh keakraban. Dari pertemuan tersebut, kami menetapkan tanggal 2 Agustus 2026 sebagai hari untuk mengikat janji suci dan memulai babak baru kehidupan kami.</p>
+                    </div>
                 </div>
-                <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
-                    <p class="story-title">Relationship</p>
-                    <p class="story-desc">Setelah melewati berbagai cerita dan tumbuh bersama selama bertahun-tahun, kami memutuskan untuk melangkah ke jenjang yang lebih serius. Dengan penuh kebahagiaan, kami mempertemukan kedua keluarga untuk membicarakan masa depan kami bersama.</p>
-                </div>
-                <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
-                    <p class="story-title">Married</p>
-                    <p class="story-desc">Kedua keluarga kembali dipertemukan dalam suasana yang hangat dan penuh keakraban. Dari pertemuan tersebut, kami menetapkan tanggal 2 Agustus 2026 sebagai hari untuk mengikat janji suci dan memulai babak baru kehidupan kami.</p>
-                </div>
-                </div>
+
             </div>
         </section>
 
