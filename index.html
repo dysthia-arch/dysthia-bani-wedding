@@ -476,7 +476,6 @@
             width: 100%;
             max-width: 500px; 
             height: 100vh;
-            /* Ganti video pake gambar statis lu */
             background-image: url('bg-gift.jpg');
             background-size: cover;
             background-position: center;
@@ -489,8 +488,8 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Overlay sedikit lebih gelap biar form dan kotak putihnya makin stand out */
-            background: rgba(11, 19, 37, 0.7); 
+            /* DISINI AKAR MASALAHNYA! UDAH DIGANTI JADI 0.4 BIAR SAMA KAYAK BG-PROFILE */
+            background: rgba(11, 19, 37, 0.4); 
             z-index: 1;
             pointer-events: none;
         }
