@@ -321,7 +321,14 @@
             background-repeat: no-repeat;
         }
         
-        /* Efek shadow hitam sudah dihapus dari sini agar background asli terlihat jelas */
+        /* Overlay disamain tingkat transparansinya (0.4) kaya di bg-profile */
+        #acara::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(11, 19, 37, 0.4); 
+            z-index: 1; 
+        }
 
         .acara-content {
             position: relative; 
