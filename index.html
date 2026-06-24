@@ -303,31 +303,46 @@
         }
 
         /* --- 5. COUNTDOWN --- */
-        .countdown-container { display: flex; justify-content: center; gap: 10px; margin: 30px 0; }
+        .countdown-container { display: flex; justify-content: center; gap: 10px; margin: 30px 0; width: 100%; }
         .cd-box { background: rgba(255,255,255,0.1); border: 1px solid var(--warna-aksen); padding: 15px 10px; border-radius: 8px; width: 70px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); backdrop-filter: blur(5px); }
         .cd-angka { font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: bold; color: var(--warna-aksen); text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
         .cd-teks { font-family: 'Poppins', sans-serif; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--warna-teks); text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 
-        /* --- 6. ACARA --- */
+        /* --- 6. ACARA & QR CODE --- */
         #acara {
             position: relative;
             padding: 0; 
             min-height: 100vh; 
             display: flex;
             align-items: center;
+            clip-path: inset(0 0 0 0); /* Sama kaya style di profil biar gak luber / zoom out */
+            background: transparent;
+        }
+
+        /* Parallax background dibikin sama kaya profil */
+        .parallax-bg-acara {
+            position: fixed;
+            top: 0; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px; 
+            height: 100vh;
             background-image: url('bg-acara.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            z-index: 1; 
+            pointer-events: none;
         }
         
-        /* Overlay disamain tingkat transparansinya (0.4) kaya di bg-profile */
-        #acara::before {
+        #acara::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(11, 19, 37, 0.4); 
-            z-index: 1; 
+            z-index: 1;
+            pointer-events: none;
         }
 
         .acara-content {
@@ -336,17 +351,20 @@
             width: 100%;
             padding: 80px 30px 100px 30px; 
             background: transparent; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .card-acara { background: rgba(250, 248, 245, 0.95); padding: 30px 20px; border-radius: 10px; border-top: 4px solid var(--warna-aksen); box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-bottom: 25px; color: var(--warna-teks-gelap); }
+        
+        .card-acara { width: 100%; background: rgba(250, 248, 245, 0.95); padding: 30px 20px; border-radius: 10px; border-top: 4px solid var(--warna-aksen); box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-bottom: 25px; color: var(--warna-teks-gelap); }
         .card-acara h3 { color: var(--warna-bg); }
         .hari-tanggal { font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.2rem; margin-bottom: 10px; color: var(--warna-teks-gelap); }
         .jam-alamat { font-family: 'Poppins', sans-serif; font-size: 0.85rem; margin-bottom: 15px; line-height: 1.6; }
         .btn-maps { display: inline-block; padding: 10px 25px; background: white; border: 1px solid var(--warna-aksen); color: #b5952f; text-decoration: none; font-family: 'Poppins', sans-serif; font-size: 0.8rem; border-radius: 30px; transition: 0.3s; margin-top: 10px; font-weight: bold; }
         .btn-maps:hover { background: var(--warna-aksen); color: white; }
 
-        /* --- 7. QR CODE VIP --- */
-        #qrcode-section { background-color: var(--warna-kertas); }
-        .qr-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin: 0 auto 15px auto; display: none; width: fit-content; color: var(--warna-teks-gelap); }
+        /* QR Container dipindah masuk ke acara, border dikasih aksen emas biar cakep */
+        .qr-container { background: rgba(250, 248, 245, 0.95); padding: 20px; border-radius: 10px; border-top: 4px solid var(--warna-aksen); box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin: 0 auto 15px auto; display: none; width: fit-content; color: var(--warna-teks-gelap); }
         #qr-image { width: 160px; height: 160px; }
 
         /* --- 8. GALLERY --- */
@@ -574,7 +592,10 @@
             </div>
         </section>
         
+        <!-- BAGIAN ACARA & QR CODE SEKARANG DIGABUNG DI SINI -->
         <section id="acara">
+            <div class="parallax-bg-acara"></div>
+
             <div class="acara-content">
                 <h2 class="judul-section" data-aos="fade-up" style="margin-bottom: 25px;">Menuju Hari Bahagia</h2>
                 
@@ -598,18 +619,18 @@
                     <p class="jam-alamat">Pukul 11.00 - 13.00 WIB<br><br><strong>Indy Hall Bintaro Office Park</strong><br>Jl. Boulevard Bintaro Jaya Blok B7/A6, Sektor VII, CBD Bintaro Jaya, Tangerang Selatan</p>
                     <a href="https://maps.app.goo.gl/uehXFWh6AUnTRFzc8" target="_blank" class="btn-maps">Lokasi Acara</a>
                 </div>
-            </div>
-        </section>
 
-        <section id="qrcode-section">
-            <div data-aos="zoom-in" data-aos-duration="1000">
-                <h2 class="judul-section">Akses Masuk</h2>
-                <p style="font-size: 1rem; margin-bottom: 20px;">Tunjukkan QR Code ini kepada penerima tamu sebagai akses masuk ke lokasi acara.</p>
-                
-                <div class="qr-container" id="qr-area">
-                    <img id="qr-image" src="" alt="QR Code Kehadiran">
+                <!-- Bagian Akses Masuk gabung ke bawahnya -->
+                <div data-aos="zoom-in" data-aos-duration="1000" style="margin-top: 40px; width: 100%;">
+                    <h2 class="judul-section" style="font-size: 2.5rem; margin-bottom: 10px;">Akses Masuk</h2>
+                    <p style="font-size: 1rem; margin-bottom: 20px; color: var(--warna-teks); text-shadow: 0 2px 5px rgba(0,0,0,0.8);">Tunjukkan QR Code ini kepada penerima tamu sebagai akses masuk ke lokasi acara.</p>
+                    
+                    <div class="qr-container" id="qr-area">
+                        <img id="qr-image" src="" alt="QR Code Kehadiran">
+                    </div>
+                    <p id="teks-instruksi" style="font-family: 'Poppins', sans-serif; font-size: 0.8rem; color: #d9534f; background: rgba(250, 248, 245, 0.95); display: inline-block; padding: 5px 15px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: 600;"></p>
                 </div>
-                <p id="teks-instruksi" style="font-family: 'Poppins', sans-serif; font-size: 0.8rem; color: #d9534f;"></p>
+
             </div>
         </section>
 
