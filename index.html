@@ -558,9 +558,6 @@
             .nama-mempelai { font-size: 2rem !important; }
             #closing h1 { font-size: 2.5rem !important; }
             .hero-tanggal { font-size: 0.9rem !important; }
-        #gift-closing { position: relative; padding: 0; min-height: 100vh; display: flex; align-items: center; clip-path: inset(0 0 0 0); background: transparent; }
-.parallax-bg-gift { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; height: 100vh; background-image: url('bg-gift.jpg'); background-size: cover; background-position: center; z-index: 1; pointer-events: none; }
-#gift-closing::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 19, 37, 0.4); z-index: 1; pointer-events: none; }
         }
     </style>
 </head>
@@ -725,13 +722,12 @@
             </div>
         </section>
 
-        <!-- GABUNGAN GIFT, RSVP, DAN CLOSING -->
-        <section id="gift-closing" style="padding: 0; position: relative;">
+        <!-- SECTION GABUNGAN: WEDDING GIFT & RSVP -->
+        <section id="gift-rsvp">
             <div class="parallax-bg-gift"></div>
 
-            <div class="gift-rsvp-content" style="position: relative; z-index: 2; padding: 100px 30px;">
-                
-                <!-- WEDDING GIFT -->
+            <div class="gift-rsvp-content">
+                <!-- BAGIAN WEDDING GIFT -->
                 <h2 class="judul-section" data-aos="fade-up">Wedding Gift</h2>
                 <p style="font-size: 1.05rem; margin-bottom: 30px; line-height: 1.6; font-weight: 600;" data-aos="fade-up">
                     Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda bermaksud memberikan tanda kasih, dapat melalui fitur di bawah ini:
@@ -757,8 +753,10 @@
                     <button class="btn-copy" onclick="salinTeks('alamat1')">Salin Alamat</button>
                 </div>
 
-                <!-- WISHES & RSVP -->
+                <!-- Spacer antar bagian -->
                 <div style="margin-top: 80px;"></div>
+
+                <!-- BAGIAN WISHES & RSVP -->
                 <h2 class="judul-section" data-aos="fade-up">Wishes & RSVP</h2>
                 <p style="font-size: 1rem; margin-bottom: 10px;" data-aos="fade-up">Berikan ucapan serta konfirmasi kehadiran Anda.</p>
 
@@ -783,19 +781,26 @@
                     </div>
                 </div>
                 
-                <div id="wishes-display" data-aos="fade-up"></div>
-
-                <!-- CLOSING -->
-                <div style="margin-top: 80px;" data-aos="zoom-in" data-aos-duration="1500">
-                    <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px; color: white; text-shadow: 0 2px 5px rgba(0,0,0,0.8);">Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.<br><br>Terima kasih.</p>
-                    
-                    <h1 style="font-family: 'Pinyon Script', cursive; font-size: 3.2rem; color: var(--warna-aksen); text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Dysthia & Bani</h1>
-                    
-                    <p style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; margin-top: 50px; color: var(--warna-teks); opacity: 0.5; letter-spacing: 1px;">
-                        🎵 Music : Kenny G - The Wedding Song
-                    </p>
+                <div id="wishes-display" data-aos="fade-up">
                 </div>
 
+            </div>
+        </section>
+
+        <section id="closing">
+            <video muted playsinline preload="none" class="video-bg-container" id="closing-video">
+                <source src="bg-closing.mp4" type="video/mp4">
+            </video>
+
+            <div class="closing-content" data-aos="zoom-in" data-aos-duration="1500">
+                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 40px;">Merupakan suatu kehormatan dan kebahagiaan bagi kami, apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.<br><br>Terima kasih.</p>
+                
+                <h1 style="font-family: 'Pinyon Script', cursive; font-size: 3.2rem; color: var(--warna-aksen); text-shadow: 0 2px 10px rgba(0,0,0,0.8);">Dysthia & Bani</h1>
+                
+                <!-- Credit Musik -->
+                <p style="font-family: 'Poppins', sans-serif; font-size: 0.75rem; margin-top: 50px; color: var(--warna-teks); opacity: 0.5; letter-spacing: 1px;">
+                    🎵 Music : Kenny G - The Wedding Song
+                </p>
             </div>
         </section>
 
@@ -846,7 +851,9 @@
         const musik = document.getElementById("bg-music");
         const musicBtn = document.getElementById("music-btn");
         
-        const heroVideo = document.getElementById('hero-video'); 
+        const heroVideo = document.getElementById('hero-video');
+        // Gift video dihapus karena udah diganti parallax image
+        const closingVideo = document.getElementById('closing-video'); 
         
         let isPlaying = false;
 
@@ -885,6 +892,14 @@
                 if(heroVideo) heroVideo.play();
             } else { 
                 if(heroVideo) heroVideo.pause(); 
+            }
+
+            // SENSOR CLOSING
+            if(closingVideo) {
+                const rectClosing = document.getElementById('closing').getBoundingClientRect();
+                if (rectClosing.top < window.innerHeight && rectClosing.bottom > 0) {
+                    if (!isClosingStarted) { closingVideo.play(); isClosingStarted = true; }
+                } else { closingVideo.pause(); isClosingStarted = false; }
             }
         });
 
