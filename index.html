@@ -248,14 +248,26 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
+        /* Tambahin class ini buat huruf Arab Bismillah */
+        .bismillah {
+            font-size: 1.8rem;
+            font-weight: normal;
+            margin-top: 60px;
+            margin-bottom: 10px;
+            color: var(--warna-aksen);
+            text-align: center;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+        }
+
+        /* Replace class teks-pembuka yang lama dengan yang ini */
         .teks-pembuka {
             font-family: 'Cormorant Garamond', serif; 
-            font-size: 0.95rem; 
+            font-size: 1.15rem; /* Font udah gue gedein dari 0.95rem */
             font-style: italic; 
             font-weight: 600; 
             line-height: 1.6;
             color: var(--warna-teks);
-            margin-top: 60px; 
+            margin-top: 10px; /* Margin atas disesuaikan biar jarak ke bismillah pas */
             margin-bottom: 30px;
             text-align: center;
             text-shadow: 0 2px 5px rgba(0,0,0,0.8); 
@@ -605,7 +617,11 @@
             <div class="parallax-bg"></div>
 
             <div class="profile-content">
-                <p class="teks-pembuka" data-aos="fade-up" data-aos-duration="1000">
+                <p class="bismillah" data-aos="fade-up" data-aos-duration="1000">
+                    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+                </p>
+
+                <p class="teks-pembuka" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                     Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah semoga ridho-Mu tercurah mengiringi pernikahan kami:
                 </p>
 
