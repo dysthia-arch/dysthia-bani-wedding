@@ -372,7 +372,7 @@
             min-height: 100vh; 
             display: flex;
             align-items: center;
-            clip-path: inset(0 0 0 0); /* Biar efek parallax gak lari ke section lain */
+            clip-path: inset(0 0 0 0); 
             background: transparent;
         }
 
@@ -384,7 +384,6 @@
             width: 100%;
             max-width: 500px; 
             height: 100vh;
-            /* Kita pake bg lovestory buat jadi background utama gabungannya */
             background-image: url('bg-lovestory.jpg');
             background-size: cover;
             background-position: center;
@@ -409,25 +408,22 @@
             background: transparent; 
         }
 
-        /* Styling buat Gallery Grid */
         .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; margin-bottom: 80px; }
         .gallery-item { width: 100%; height: 280px; background-color: #ddd; background-size: cover; background-position: center; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); border: 2px solid rgba(212, 175, 55, 0.3); }
 
-        /* Styling buat Love Story Timeline (Garis Waktu) */
         .timeline {
             position: relative;
-            padding-left: 30px; /* Jarak biar kotaknya gak nabrak garis */
+            padding-left: 30px; 
             margin-top: 30px;
             text-align: left;
         }
 
-        /* Ini Garis Emasnya */
         .timeline::before {
             content: '';
             position: absolute;
             top: 10px;
             bottom: 10px;
-            left: 8px; /* Posisi garis di kiri */
+            left: 8px; 
             width: 3px;
             background: var(--warna-aksen);
             border-radius: 5px;
@@ -444,17 +440,16 @@
             border: 1px solid rgba(212, 175, 55, 0.5);
         }
 
-        /* Ini Titik Emas Bulat di atas Garis */
         .story-item::before {
             content: '';
             position: absolute;
             top: 25px;
-            left: -32px; /* Posisi titik pas di atas garis emas */
+            left: -32px; 
             width: 18px;
             height: 18px;
             background: var(--warna-aksen);
             border-radius: 50%;
-            border: 4px solid var(--warna-bg); /* Kasih pinggiran navy biar titiknya pop-out */
+            border: 4px solid var(--warna-bg); 
             z-index: 2;
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
@@ -462,41 +457,62 @@
         .story-title { font-family: 'Cinzel', serif; font-weight: bold; margin-bottom: 8px; color: var(--warna-bg); font-size: 1.1rem; } 
         .story-desc { font-size: 0.95rem; line-height: 1.6; }
 
-        /* --- 9. WEDDING GIFT --- */
-        #gift {
+        /* --- 9 & 10. WEDDING GIFT DAN RSVP (GABUNGAN PARALLAX) --- */
+        #gift-rsvp {
             position: relative;
             padding: 0; 
             min-height: 100vh; 
             display: flex;
             align-items: center;
+            clip-path: inset(0 0 0 0); 
+            background: transparent;
         }
-        #gift::before {
+
+        .parallax-bg-gift {
+            position: fixed;
+            top: 0; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px; 
+            height: 100vh;
+            /* Ganti video pake gambar statis lu */
+            background-image: url('bg-gift.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1; 
+            pointer-events: none;
+        }
+
+        #gift-rsvp::after {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(11, 19, 37, 0.85); 
+            /* Overlay sedikit lebih gelap biar form dan kotak putihnya makin stand out */
+            background: rgba(11, 19, 37, 0.7); 
             z-index: 1;
+            pointer-events: none;
         }
-        .gift-content {
+
+        .gift-rsvp-content {
             position: relative; z-index: 2;
             width: 100%;
             padding: 100px 30px; 
             background: transparent; 
         }
+
         .rekening-box { background: rgba(250, 248, 245, 0.95); padding: 25px; border-radius: 10px; margin-bottom: 15px; width: 100%; box-shadow: 0 10px 25px rgba(0,0,0,0.2); border: 1px solid var(--warna-aksen); color: var(--warna-teks-gelap); }
         .bank-nama { font-weight: bold; font-family: 'Poppins', sans-serif; font-size: 1.1rem; margin-bottom: 5px;}
         .bank-norek { font-size: 1.4rem; letter-spacing: 2px; color: var(--warna-bg); margin-bottom: 5px; font-weight: bold; }
         .btn-copy { padding: 8px 15px; background: var(--warna-bg); color: white; border: none; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 0.7rem; cursor: pointer; margin-top: 10px; transition: 0.2s; border: 1px solid var(--warna-bg); }
         .btn-copy:hover { background: transparent; color: var(--warna-bg); }
 
-        /* --- 10. WISHES & RSVP --- */
-        #rsvp { background-color: var(--warna-kertas); }
         .rsvp-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; text-align: left; }
         .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; background: rgba(255,255,255,0.95); color: var(--warna-teks-gelap); }
         .btn-kirim { padding: 12px; background: var(--warna-aksen); color: white; border: none; border-radius: 5px; font-family: 'Poppins', sans-serif; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .btn-kirim:hover { background: #b5952f; }
 
-        /* --- STYLING MADING UCAPAN BARU --- */
         #wishes-display { margin-top: 25px; text-align: left; max-height: 280px; overflow-y: auto; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; display: none; border: 1px solid rgba(255,255,255,0.2); }
         .wish-item { background: rgba(250, 248, 245, 0.95); padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid var(--warna-aksen); box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: var(--warna-teks-gelap); }
         .wish-name { display: flex; align-items: center; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem; color: #2c3e50; }
@@ -671,7 +687,6 @@
             <div class="parallax-bg-story"></div>
 
             <div class="gallery-story-content">
-                <!-- Bagian Gallery -->
                 <h2 class="judul-section" data-aos="fade-up">Gallery</h2>
                 <div class="gallery-grid">
                     <div class="gallery-item" style="background-image: url('galeri1.jpg');" data-aos="zoom-in"></div>
@@ -686,7 +701,6 @@
                     <div class="gallery-item" style="background-image: url('galeri10.jpg');" data-aos="zoom-in" data-aos-delay="100"></div>
                 </div>
 
-                <!-- Bagian Love Story Timeline -->
                 <h2 class="judul-section" data-aos="fade-up">Love Story</h2>
                 
                 <div class="timeline" data-aos="fade-up" data-aos-duration="1000">
@@ -709,12 +723,12 @@
             </div>
         </section>
 
-        <section id="gift">
-            <video muted playsinline preload="none" class="video-bg-container" id="gift-video">
-                <source src="bg-gift.mp4" type="video/mp4">
-            </video>
+        <!-- SECTION GABUNGAN: WEDDING GIFT & RSVP -->
+        <section id="gift-rsvp">
+            <div class="parallax-bg-gift"></div>
 
-            <div class="gift-content">
+            <div class="gift-rsvp-content">
+                <!-- BAGIAN WEDDING GIFT -->
                 <h2 class="judul-section" data-aos="fade-up">Wedding Gift</h2>
                 <p style="font-size: 1.05rem; margin-bottom: 30px; line-height: 1.6; font-weight: 600;" data-aos="fade-up">
                     Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda bermaksud memberikan tanda kasih, dapat melalui fitur di bawah ini:
@@ -739,35 +753,38 @@
                     <p style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 10px; line-height: 1.6;" id="alamat1">Perumahaan Simprug di Poris Blok D7 no.48 RT 04 RW 06 kec. Batuceper kel.Poris Jaya, Kota Tangerang, Banten</p>
                     <button class="btn-copy" onclick="salinTeks('alamat1')">Salin Alamat</button>
                 </div>
-            </div>
-        </section>
 
-        <section id="rsvp">
-            <h2 class="judul-section" data-aos="fade-up">Wishes & RSVP</h2>
-            <p style="font-size: 1rem; margin-bottom: 10px;" data-aos="fade-up">Berikan ucapan serta konfirmasi kehadiran Anda.</p>
+                <!-- Spacer antar bagian -->
+                <div style="margin-top: 80px;"></div>
 
-            <div class="rsvp-form" data-aos="fade-up" data-aos-duration="1000">
-                <input type="text" id="rsvp-nama" placeholder="Nama Lengkap" required>
-                <select id="rsvp-hadir">
-                    <option value="Hadir">Ya, Saya akan Hadir</option>
-                    <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
-                </select>
-                <textarea id="rsvp-ucapan" rows="4" placeholder="Tulis ucapan dan doa..." required></textarea>
-                <button class="btn-kirim" id="btn-submit-rsvp" onclick="kirimRSVP()">Kirim Konfirmasi</button>
-            </div>
-            
-            <div class="counter-wrapper" style="display: flex; gap: 10px; margin-top: 25px; margin-bottom: 20px;">
-                <div style="flex: 1; background: #e2f5e3; padding: 15px; border-radius: 8px; border: 1px solid #27ae60;">
-                    <div style="font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: #27ae60; font-weight: bold;">HADIR</div>
-                    <div id="jumlah-hadir" style="font-family: 'Cinzel', serif; font-size: 1.5rem; color: #27ae60;">0</div>
+                <!-- BAGIAN WISHES & RSVP -->
+                <h2 class="judul-section" data-aos="fade-up">Wishes & RSVP</h2>
+                <p style="font-size: 1rem; margin-bottom: 10px;" data-aos="fade-up">Berikan ucapan serta konfirmasi kehadiran Anda.</p>
+
+                <div class="rsvp-form" data-aos="fade-up" data-aos-duration="1000">
+                    <input type="text" id="rsvp-nama" placeholder="Nama Lengkap" required>
+                    <select id="rsvp-hadir">
+                        <option value="Hadir">Ya, Saya akan Hadir</option>
+                        <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
+                    </select>
+                    <textarea id="rsvp-ucapan" rows="4" placeholder="Tulis ucapan dan doa..." required></textarea>
+                    <button class="btn-kirim" id="btn-submit-rsvp" onclick="kirimRSVP()">Kirim Konfirmasi</button>
                 </div>
-                <div style="flex: 1; background: #fce4e4; padding: 15px; border-radius: 8px; border: 1px solid #c0392b;">
-                    <div style="font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: #c0392b; font-weight: bold;">TIDAK HADIR</div>
-                    <div id="jumlah-tidak-hadir" style="font-family: 'Cinzel', serif; font-size: 1.5rem; color: #c0392b;">0</div>
+                
+                <div class="counter-wrapper" style="display: flex; gap: 10px; margin-top: 25px; margin-bottom: 20px;" data-aos="fade-up">
+                    <div style="flex: 1; background: #e2f5e3; padding: 15px; border-radius: 8px; border: 1px solid #27ae60;">
+                        <div style="font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: #27ae60; font-weight: bold;">HADIR</div>
+                        <div id="jumlah-hadir" style="font-family: 'Cinzel', serif; font-size: 1.5rem; color: #27ae60;">0</div>
+                    </div>
+                    <div style="flex: 1; background: #fce4e4; padding: 15px; border-radius: 8px; border: 1px solid #c0392b;">
+                        <div style="font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: #c0392b; font-weight: bold;">TIDAK HADIR</div>
+                        <div id="jumlah-tidak-hadir" style="font-family: 'Cinzel', serif; font-size: 1.5rem; color: #c0392b;">0</div>
+                    </div>
                 </div>
-            </div>
-            
-            <div id="wishes-display" data-aos="fade-up">
+                
+                <div id="wishes-display" data-aos="fade-up">
+                </div>
+
             </div>
         </section>
 
@@ -836,7 +853,7 @@
         const musicBtn = document.getElementById("music-btn");
         
         const heroVideo = document.getElementById('hero-video');
-        const giftVideo = document.getElementById('gift-video'); 
+        // Gift video dihapus karena udah diganti parallax image
         const closingVideo = document.getElementById('closing-video'); 
         
         let isPlaying = false;
@@ -846,7 +863,7 @@
             document.body.style.overflow = "auto"; 
             window.scrollTo(0, 0); 
             
-            const semuaVideo = [heroVideo, giftVideo, closingVideo];
+            const semuaVideo = [heroVideo, closingVideo];
             
             semuaVideo.forEach(vid => {
                 if(vid) {
@@ -866,7 +883,6 @@
             }
         }
 
-        let isGiftStarted = false;
         let isClosingStarted = false;
 
         window.addEventListener('scroll', function() {
@@ -877,14 +893,6 @@
                 if(heroVideo) heroVideo.play();
             } else { 
                 if(heroVideo) heroVideo.pause(); 
-            }
-
-            // SENSOR GIFT
-            if(giftVideo) {
-                const rectGift = document.getElementById('gift').getBoundingClientRect();
-                if (rectGift.top < window.innerHeight && rectGift.bottom > 0) {
-                    if (!isGiftStarted) { giftVideo.play(); isGiftStarted = true; }
-                } else { giftVideo.pause(); isGiftStarted = false; }
             }
 
             // SENSOR CLOSING
