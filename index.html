@@ -707,7 +707,7 @@
             .hero-tanggal { font-size: 0.9rem !important; }
         }
 
-       /* --- TAMBAHAN UNTUK SPLIT SCREEN (KIRI FOTO, KANAN UNDANGAN) --- */
+      /* --- TAMBAHAN UNTUK SPLIT SCREEN (KIRI FOTO, KANAN UNDANGAN) --- */
         @media (min-width: 769px) {
             
             /* 1. Paksa undangan utama geser ke kanan mentok */
@@ -722,10 +722,7 @@
                 top: 0;
                 width: calc(100% - 500px); 
                 height: 100vh;
-                
-                /* 👇👇 PENTING: GANTI NAMA FILE INI SAMA FOTO PREWED LU 👇👇 */
-                background-image: url('NAMA_FILE_FOTO_LU.jpg'); 
-                
+                background-image: url('NAMA_FILE_FOTO_LU.jpg'); /* JANGAN LUPA GANTI NAMA FOTO LU DI SINI */
                 background-size: cover;
                 background-position: center;
                 z-index: 10; 
@@ -784,23 +781,6 @@
                 transform: translateY(-20px) !important; 
             }
         }
-
-            /* Geser posisi cover dan efek parallax ngikutin undangan di kanan */
-            #cover-overlay, 
-            .parallax-bg, 
-            .parallax-bg-acara, 
-            .parallax-bg-story, 
-            .parallax-bg-gift {
-                left: auto !important;
-                right: 0 !important;
-                transform: none !important;
-            }
-
-            /* Fix sedikit biar animasi pas klik "Buka Undangan" tetep mulus di desktop */
-            .hide-cover {
-                transform: translateY(-20px) !important; 
-            }
-        
 
         /* Kalau dibuka di HP, sembunyiin foto besarnya biar layout balik kaya awal */
         @media (max-width: 768px) {
@@ -963,7 +943,6 @@
                 <h2 class="judul-section" data-aos="fade-up">Love Story</h2>
                 
                 <div class="timeline" id="timeline-container" data-aos="fade-up" data-aos-duration="1000">
-                    <!-- Ini garis yang bakal jalan pas di-scroll -->
                     <div class="timeline-progress" id="timeline-line"></div>
                     
                     <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
@@ -980,17 +959,6 @@
                     
                     <div class="story-item" data-aos="fade-up" data-aos-duration="1000">
                         <div class="story-icon">♥</div>
-                        <p class="story-title">Married</p>
-                        <p class="story-desc">Kedua keluarga kembali dipertemukan dalam suasana yang hangat dan penuh keakraban. Dari pertemuan tersebut, kami menetapkan tanggal 2 Agustus 2026 sebagai hari untuk mengikat janji suci dan memulai babak baru kehidupan kami.</p>
-                    </div>
-                </div>
-                    
-                    <div class="story-item" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="150">
-                        <p class="story-title">Relationship</p>
-                        <p class="story-desc">Setelah melewati berbagai cerita dan tumbuh bersama selama bertahun-tahun, kami memutuskan untuk melangkah ke jenjang yang lebih serius. Dengan penuh kebahagiaan, kami mempertemukan kedua keluarga untuk membicarakan masa depan kami bersama.</p>
-                    </div>
-                    
-                    <div class="story-item" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="300">
                         <p class="story-title">Married</p>
                         <p class="story-desc">Kedua keluarga kembali dipertemukan dalam suasana yang hangat dan penuh keakraban. Dari pertemuan tersebut, kami menetapkan tanggal 2 Agustus 2026 sebagai hari untuk mengikat janji suci dan memulai babak baru kehidupan kami.</p>
                     </div>
