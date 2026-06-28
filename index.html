@@ -604,9 +604,59 @@
             #closing h1 { font-size: 2.5rem !important; }
             .hero-tanggal { font-size: 0.9rem !important; }
         }
+
+        /* --- TAMBAHAN UNTUK SPLIT SCREEN (KIRI FOTO, KANAN UNDANGAN) --- */
+        @media (min-width: 769px) {
+            body {
+                display: flex;
+                justify-content: flex-end; /* Dorong area undangan ke kanan */
+            }
+
+            .main-wrapper {
+                margin: 0 !important; /* Hapus margin auto biar nempel ke kanan */
+            }
+
+            .left-side {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: calc(100% - 500px); /* Ngambil sisa layar selain undangan (500px) */
+                height: 100vh;
+                /* GANTI NAMA FILE DI BAWAH SAMA FOTO BESAR LU */
+                background-image: url('foto-prewed.jpg'); 
+                background-size: cover;
+                background-position: center;
+                z-index: 10; 
+            }
+
+            /* Geser posisi cover dan efek parallax ngikutin undangan di kanan */
+            #cover-overlay, 
+            .parallax-bg, 
+            .parallax-bg-acara, 
+            .parallax-bg-story, 
+            .parallax-bg-gift {
+                left: auto !important;
+                right: 0 !important;
+                transform: none !important;
+            }
+
+            /* Fix sedikit biar animasi pas klik "Buka Undangan" tetep mulus di desktop */
+            .hide-cover {
+                transform: translateY(-20px) !important; 
+            }
+        }
+
+        /* Kalau dibuka di HP, sembunyiin foto besarnya biar layout balik kaya awal */
+        @media (max-width: 768px) {
+            .left-side {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <div class="left-side"></div>
 
     <audio id="bg-music" loop>
         <source src="music.mp3" type="audio/mpeg">
