@@ -522,23 +522,77 @@
         .btn-kirim { padding: 12px; background: var(--warna-aksen); color: white; border: none; border-radius: 5px; font-family: 'Poppins', sans-serif; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .btn-kirim:hover { background: #b5952f; }
 
-        /* --- MADING UCAPAN ORIGINAL (TANPA ITALIC & PAKE PAGE) --- */
+        /* --- MADING UCAPAN BARU (STYLE CHAT / KOMENTAR) --- */
         #wishes-display { 
             margin-top: 25px; 
             text-align: left; 
-            background: rgba(255,255,255,0.1); 
-            padding: 15px; 
+            background: rgba(255,255,255,0.1); /* Tetap transparan */
+            padding: 15px 20px; 
             border-radius: 8px; 
             display: none; 
             border: 1px solid rgba(255,255,255,0.2); 
         }
-        .wish-item { background: rgba(250, 248, 245, 0.95); padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid var(--warna-aksen); box-shadow: 0 4px 10px rgba(0,0,0,0.2); color: var(--warna-teks-gelap); }
-        .wish-name { display: flex; align-items: center; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.85rem; color: #2c3e50; }
-        .wish-status { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; border-radius: 50%; font-size: 0.6rem; margin-left: 6px; color: white; font-weight: bold; }
-        .wish-status.hadir { background-color: #27ae60; }
-        .wish-status.tidak { background-color: #e74c3c; }
-        .wish-text { font-size: 0.9rem; margin-top: 6px; font-style: normal; line-height: 1.4; color: #4a4a4a; } 
 
+        .wish-item { 
+            display: flex; 
+            gap: 15px; 
+            padding: 15px 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.2); /* Garis pembatas */
+            color: var(--warna-teks); 
+        }
+        
+        .wish-item:last-child {
+            border-bottom: none; /* Hilangin garis di item paling bawah */
+        }
+
+        .wish-avatar {
+            width: 42px;
+            height: 42px;
+            background-color: var(--warna-kertas); /* Pake warna navy tema lu */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            border: 1px solid var(--warna-aksen);
+        }
+
+        .wish-content {
+            flex: 1;
+        }
+
+        .wish-name-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .wish-name { 
+            font-family: 'Poppins', sans-serif; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            color: var(--warna-aksen); /* Teks nama jadi gold */
+        }
+
+        .wish-icon {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 2px;
+        }
+
+        .wish-time {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 2px;
+            margin-bottom: 8px;
+        }
+
+        .wish-text { 
+            font-size: 0.9rem; 
+            line-height: 1.5; 
+            color: var(--warna-teks); 
+        }
         /* --- CSS TOMBOL HALAMAN MADING --- */
         .pagination-container {
             display: flex;
@@ -1102,30 +1156,44 @@
             const displayArea = document.getElementById('wishes-display');
             let paginationArea = document.getElementById('pagination-area');
             
-            // Pengaman: Kalo HTML div pagination-area gak ada, JS otomatis bikinin
             if (!paginationArea) {
                 paginationArea = document.createElement('div');
                 paginationArea.id = 'pagination-area';
                 paginationArea.className = 'pagination-container';
-                // Masukin setelah kotak wishes-display
                 displayArea.parentNode.insertBefore(paginationArea, displayArea.nextSibling);
             }
 
             displayArea.innerHTML = '';
             paginationArea.innerHTML = '';
 
-            // Hitung batasan yang mau ditampilin (per 5 ucapan)
             const startIndex = (page - 1) * wishesPerPage;
             const endIndex = startIndex + wishesPerPage;
             const wishesToShow = allWishes.slice(startIndex, endIndex);
 
             wishesToShow.forEach(wish => {
-                const statusClass = wish.hadir === 'Hadir' ? 'hadir' : 'tidak';
-                const badgeIcon = wish.hadir === 'Hadir' ? '✔' : '✖';
+                // --- Bikin Icon Ceklis & Silang mirip Screenshot ---
+                const isHadir = wish.hadir === 'Hadir';
+                const svgIcon = isHadir 
+                    ? `<svg viewBox="0 0 24 24" fill="#27ae60" width="16" height="16"><path d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-13 5l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>`
+                    : `<svg viewBox="0 0 24 24" fill="#e74c3c" width="16" height="16"><path d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-7.7-3.3l1.4 1.4-3.3 3.3 3.3 3.3-1.4 1.4-3.3-3.3-3.3 3.3-1.4-1.4 3.3-3.3-3.3-3.3 1.4-1.4 3.3 3.3 3.3-3.3z"/></svg>`;
+
+                // --- Ambil jam dari database (kalau gak ada, muncul tulisan 'Baru Saja') ---
+                const waktuUcapan = wish.timestamp || wish.waktu || "Baru saja";
+
+                // --- Struktur HTML per Ucapan ---
                 displayArea.innerHTML += `
                     <div class="wish-item">
-                        <div class="wish-name">${wish.nama} <span class="wish-status ${statusClass}" title="${wish.hadir}">${badgeIcon}</span></div>
-                        <p class="wish-text">"${wish.ucapan}"</p>
+                        <div class="wish-avatar">
+                            <svg viewBox="0 0 24 24" fill="#ffffff" width="24" height="24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <div class="wish-content">
+                            <div class="wish-name-row">
+                                <span class="wish-name">${wish.nama}</span>
+                                <span class="wish-icon" title="${wish.hadir}">${svgIcon}</span>
+                            </div>
+                            <div class="wish-time">${waktuUcapan}</div>
+                            <div class="wish-text">${wish.ucapan}</div>
+                        </div>
                     </div>
                 `;
             });
