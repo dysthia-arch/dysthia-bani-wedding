@@ -605,29 +605,87 @@
             .hero-tanggal { font-size: 0.9rem !important; }
         }
 
-        /* --- TAMBAHAN UNTUK SPLIT SCREEN (KIRI FOTO, KANAN UNDANGAN) --- */
+       /* --- TAMBAHAN UNTUK SPLIT SCREEN (KIRI FOTO, KANAN UNDANGAN) --- */
         @media (min-width: 769px) {
             body {
                 display: flex;
-                justify-content: flex-end; /* Dorong area undangan ke kanan */
+                justify-content: flex-end; 
             }
 
             .main-wrapper {
-                margin: 0 !important; /* Hapus margin auto biar nempel ke kanan */
+                margin: 0 !important; 
             }
 
+            /* UPDATE: Pengaturan Foto & Posisi Teks */
             .left-side {
                 position: fixed;
                 left: 0;
                 top: 0;
-                width: calc(100% - 500px); /* Ngambil sisa layar selain undangan (500px) */
+                width: calc(100% - 500px); 
                 height: 100vh;
                 /* GANTI NAMA FILE DI BAWAH SAMA FOTO BESAR LU */
-                background-image: url('foto-prewed.jpg'); 
+                background-image: url('NAMA_FILE_FOTO_LU.jpg'); 
                 background-size: cover;
                 background-position: center;
                 z-index: 10; 
+                
+                /* Ini buat dorong konten (teks) ke bagian bawah tengah */
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                align-items: center;
+                padding-bottom: 80px; 
             }
+
+            /* Tambahan efek bayangan gelap di bawah biar teksnya kebaca jelas */
+            .left-side::after {
+                content: '';
+                position: absolute;
+                bottom: 0; left: 0; width: 100%; height: 40%;
+                background: linear-gradient(to top, rgba(11, 19, 37, 0.9), transparent);
+                z-index: 1;
+            }
+
+            /* Styling untuk Teksnya */
+            .left-content {
+                position: relative;
+                z-index: 2; /* Biar teksnya ada di atas bayangan gelap */
+                text-align: center;
+            }
+
+            .left-text-up {
+                font-family: 'Poppins', sans-serif;
+                font-size: 1.1rem;
+                letter-spacing: 5px;
+                color: var(--warna-aksen); /* Pake warna gold tema lu */
+                margin-bottom: 5px;
+                font-weight: 600;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            }
+
+            .left-nama {
+                font-family: 'Pinyon Script', cursive; /* Pake font latin tema lu */
+                font-size: 6rem; /* Gedein biar mantap */
+                color: #ffffff;
+                margin: 0;
+                line-height: 1;
+                text-shadow: 0 2px 15px rgba(0,0,0,0.9);
+            }
+
+            #cover-overlay, 
+            .parallax-bg, 
+            .parallax-bg-acara, 
+            .parallax-bg-story, 
+            .parallax-bg-gift {
+                left: auto !important;
+                right: 0 !important;
+                transform: none !important;
+            }
+
+            .hide-cover {
+                transform: translateY(-20px) !important; 
+            }
+        }
 
             /* Geser posisi cover dan efek parallax ngikutin undangan di kanan */
             #cover-overlay, 
@@ -644,7 +702,7 @@
             .hide-cover {
                 transform: translateY(-20px) !important; 
             }
-        }
+        
 
         /* Kalau dibuka di HP, sembunyiin foto besarnya biar layout balik kaya awal */
         @media (max-width: 768px) {
@@ -656,7 +714,12 @@
 </head>
 <body>
 
-    <div class="left-side"></div>
+    <div class="left-side">
+        <div class="left-content">
+            <p class="left-text-up">THE WEDDING OF</p>
+            <h1 class="left-nama">Dysthia & Bani</h1>
+        </div>
+    </div>
 
     <audio id="bg-music" loop>
         <source src="music.mp3" type="audio/mpeg">
