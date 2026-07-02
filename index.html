@@ -1105,18 +1105,16 @@
 
     </div>
 
-    <button class="music-control" id="music-btn" style="display: none;" onclick="toggleMusic()">
-        <!-- Ikon Piringan Hitam (Pas Nyala) -->
+   <button class="music-control" id="music-btn" style="display: none;" onclick="toggleMusic()">
         <svg class="icon-play" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14.5c-2.49 0-4.5-2.01-4.5-4.5S9.51 7.5 12 7.5s4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5zm0-5.5c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"/>
         </svg>
-        <!-- Ikon Nada Dicoret (Pas Mati/Mute) -->
         <svg class="icon-mute" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
             <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
             <path d="M4.27 3L3 4.27l16.73 16.73L21 19.73 4.27 3z" stroke="currentColor" stroke-width="2"/>
         </svg>
+    </button>
 
-        <!-- --- LIGHTBOX / MODAL GALERI --- -->
     <div id="lightbox-modal" class="lightbox" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
         <img id="lightbox-img" src="" alt="Foto Galeri">
@@ -1404,25 +1402,21 @@
             });
         }
 
-        // --- SISTEM KLIK FOTO GALERI (LIGHTBOX) ---
-        document.addEventListener('DOMContentLoaded', function() {
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            const lightbox = document.getElementById('lightbox-modal');
-            const lightboxImg = document.getElementById('lightbox-img');
-
-            galleryItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // Ambil URL foto dari background-image CSS lu
-                    let bgImg = this.style.backgroundImage; 
-                    
-                    // Bersihkan teksnya (hilangin tulisan url("") dari sistem)
-                    bgImg = bgImg.replace(/(url\(|\)|"|')/g, ''); 
-                    
-                    // Masukin sumber foto ke kotak lightbox dan tampilkan
-                    lightboxImg.src = bgImg;
-                    lightbox.classList.add('show');
-                });
-            });
+       // --- LOGIKA MENDETEKSI TAB (Mati pas ditinggal, nyala pas balik) ---
+        document.addEventListener("visibilitychange", function() {
+            if (musik) {
+                if (document.hidden) {
+                    // Kalau tab lagi ditinggal, cukup pause aja tanpa ngerusak status asli isPlaying
+                    musik.pause();
+                    musicBtn.classList.remove("playing");
+                } else {
+                    // Pas tamu balik ke tab, musik bakal lanjut cuman kalau status isPlaying-nya emang lagi TRUE
+                    if (isPlaying) {
+                        musik.play();
+                        musicBtn.classList.add("playing");
+                    }
+                }
+            }
         });
 
         // Fungsi buat nutup foto
