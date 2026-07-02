@@ -799,6 +799,52 @@
                 display: none;
             }
         }
+
+        /* --- EFEK LIGHTBOX GALERI FOTO --- */
+        .lightbox {
+            display: none; 
+            position: fixed; 
+            z-index: 999999; /* Paling atas biar nutupin cover dll */
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(0,0,0,0.9); /* Latar hitam transparan */
+            align-items: center; 
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+        .lightbox img {
+            max-width: 90%; 
+            max-height: 90vh; 
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            object-fit: contain;
+        }
+        .lightbox.show img {
+            transform: scale(1); /* Efek zoom in */
+        }
+        .lightbox-close {
+            position: absolute; 
+            top: 20px; 
+            right: 30px; 
+            color: #fff; 
+            font-size: 40px; 
+            font-weight: bold; 
+            cursor: pointer;
+            z-index: 1000000;
+        }
+        /* Biar kursor berubah jadi tangan pas diarahkan ke foto galeri */
+        .gallery-item {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -1067,6 +1113,13 @@
             <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
             <path d="M4.27 3L3 4.27l16.73 16.73L21 19.73 4.27 3z" stroke="currentColor" stroke-width="2"/>
         </svg>
+
+        <!-- --- LIGHTBOX / MODAL GALERI --- -->
+    <div id="lightbox-modal" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Foto Galeri">
+    </div>
+    
     </button>
 
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -1347,6 +1400,32 @@
             navigator.clipboard.writeText(teks).then(() => {
                 alert("Berhasil disalin: " + teks);
             });
+        }
+
+        // --- SISTEM KLIK FOTO GALERI (LIGHTBOX) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox-modal');
+            const lightboxImg = document.getElementById('lightbox-img');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Ambil URL foto dari background-image CSS lu
+                    let bgImg = this.style.backgroundImage; 
+                    
+                    // Bersihkan teksnya (hilangin tulisan url("") dari sistem)
+                    bgImg = bgImg.replace(/(url\(|\)|"|')/g, ''); 
+                    
+                    // Masukin sumber foto ke kotak lightbox dan tampilkan
+                    lightboxImg.src = bgImg;
+                    lightbox.classList.add('show');
+                });
+            });
+        });
+
+        // Fungsi buat nutup foto
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.remove('show');
         }
     </script>
 
