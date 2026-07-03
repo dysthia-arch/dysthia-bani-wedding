@@ -1419,9 +1419,35 @@
             }
         });
 
+        // --- SISTEM KLIK FOTO GALERI (LIGHTBOX) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox-modal');
+            const lightboxImg = document.getElementById('lightbox-img');
+
+            if (galleryItems.length > 0 && lightbox && lightboxImg) {
+                galleryItems.forEach(item => {
+                    item.addEventListener('click', function() {
+                        // Ambil URL foto dari background-image CSS lu
+                        let bgImg = this.style.backgroundImage; 
+                        
+                        // Bersihkan teksnya (hilangin tulisan url("") dari sistem)
+                        bgImg = bgImg.replace(/(url\(|\)|"|')/g, ''); 
+                        
+                        // Masukin sumber foto ke kotak lightbox dan tampilkan
+                        lightboxImg.src = bgImg;
+                        lightbox.classList.add('show');
+                    });
+                });
+            }
+        });
+
         // Fungsi buat nutup foto
         function closeLightbox() {
-            document.getElementById('lightbox-modal').classList.remove('show');
+            const lightbox = document.getElementById('lightbox-modal');
+            if (lightbox) {
+                lightbox.classList.remove('show');
+            }
         }
     </script>
 
