@@ -1060,20 +1060,18 @@
                 <h2 class="judul-section" data-aos="fade-up">Wishes & RSVP</h2>
                 <p style="font-size: 1rem; margin-bottom: 10px;" data-aos="fade-up">Berikan ucapan serta konfirmasi kehadiran Anda.</p>
 
-                <div class="rsvp-form" data-aos="fade-up" data-aos-duration="1000">
-                    <input type="text" id="rsvp-nama" placeholder="Nama Lengkap" required>
-                    <select id="rsvp-hadir">
+                <!-- Dropdown Kehadiran (Pastiin ada onchange-nya ini!) -->
+                    <select id="rsvp-hadir" onchange="aturJumlahTamu()">
                         <option value="Hadir">Ya, Saya akan Hadir</option>
                         <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
                     </select>
-                    <!-- Tambahan Dropdown Jumlah Orang -->
+
+                    <!-- Dropdown Jumlah Orang -->
                     <select id="rsvp-jumlah">
                         <option value="1">1 Orang</option>
                         <option value="2">2 Orang</option>
-                        <option value="3">3 Orang</option>
-                        <option value="4">4 Orang</option>
+                        <option value="3">lebih dari 2 Orang</option>
                         <option value="0" style="display:none;">0 Orang</option> <!-- Ini pancingan buat sistem -->
-                        
                     </select>
 
                     <textarea id="rsvp-ucapan" rows="4" placeholder="Tulis ucapan dan doa..." required></textarea>
