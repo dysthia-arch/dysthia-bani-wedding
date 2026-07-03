@@ -1060,24 +1060,33 @@
                 <h2 class="judul-section" data-aos="fade-up">Wishes & RSVP</h2>
                 <p style="font-size: 1rem; margin-bottom: 10px;" data-aos="fade-up">Berikan ucapan serta konfirmasi kehadiran Anda.</p>
 
-                <!-- Dropdown Kehadiran (Pastiin ada onchange-nya ini!) -->
+                <div class="rsvp-form" data-aos="fade-up" data-aos-duration="1000">
+                    <!-- 1. Input Nama Lengkap -->
+                    <input type="text" id="rsvp-nama" placeholder="Nama Lengkap" required>
+                    
+                    <!-- 2. Dropdown Kehadiran -->
                     <select id="rsvp-hadir" onchange="aturJumlahTamu()">
                         <option value="Hadir">Ya, Saya akan Hadir</option>
                         <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
                     </select>
 
-                    <!-- Dropdown Jumlah Orang -->
-                    <select id="rsvp-jumlah">
-                        <option value="1">1 Orang</option>
-                        <option value="2">2 Orang</option>
-                        <option value="3">lebih dari 2 Orang</option>
-                        <option value="0" style="display:none;">0 Orang</option> <!-- Ini pancingan buat sistem -->
-                    </select>
+                    <!-- 3. Dropdown Jumlah Orang (Bungkus pakai div) -->
+                    <div id="jumlah-wrapper" style="width: 100%;">
+                        <select id="rsvp-jumlah" style="width: 100%;">
+                            <option value="1">1 Orang</option>
+                            <option value="2">2 Orang</option>
+                            <option value="3">lebih dari 2 Orang</option>
+                            <option value="0" style="display:none;">0 Orang</option>
+                        </select>
+                    </div>
 
+                    <!-- 4. Input Ucapan -->
                     <textarea id="rsvp-ucapan" rows="4" placeholder="Tulis ucapan dan doa..." required></textarea>
+                    
+                    <!-- 5. Tombol Kirim -->
                     <button class="btn-kirim" id="btn-submit-rsvp" onclick="kirimRSVP()">Kirim Konfirmasi</button>
                 </div>
-                
+
                 <div class="counter-wrapper" style="display: flex; gap: 10px; margin-top: 25px; margin-bottom: 20px;" data-aos="fade-up">
                     <div style="flex: 1; background: #e2f5e3; padding: 15px; border-radius: 8px; border: 1px solid #27ae60;">
                         <div style="font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: #27ae60; font-weight: bold;">HADIR</div>
