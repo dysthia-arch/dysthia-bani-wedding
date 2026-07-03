@@ -1070,13 +1070,12 @@
                         <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
                     </select>
 
-                    <!-- 3. Dropdown Jumlah Orang (Bungkus pakai div) -->
+                    <!-- Dropdown Jumlah Orang -->
                     <div id="jumlah-wrapper" style="width: 100%;">
                         <select id="rsvp-jumlah" style="width: 100%;">
                             <option value="1">1 Orang</option>
                             <option value="2">2 Orang</option>
                             <option value="3">lebih dari 2 Orang</option>
-                            <option value="0" style="display:none;">0 Orang</option>
                         </select>
                     </div>
 
@@ -1376,16 +1375,20 @@
         function kirimRSVP() {
             const nama = document.getElementById('rsvp-nama').value;
             const hadir = document.getElementById('rsvp-hadir').value;
-            const jumlah = document.getElementById('rsvp-jumlah').value; // Ini tambahan buat nangkep jumlah orang
+            let jumlah = document.getElementById('rsvp-jumlah').value; // Pakai 'let' biar angkanya bisa kita manipulasi
             const ucapan = document.getElementById('rsvp-ucapan').value;
             const btn = document.getElementById('btn-submit-rsvp');
             
+            // JALUR BELAKANG: Paksa jumlah jadi 0 kalau dia gak hadir
+            if (hadir === 'Tidak Hadir') {
+                jumlah = '0';
+            }
+
             if(!nama || !ucapan) { alert("Mohon lengkapi nama dan ucapan Anda."); return; }
 
             btn.innerText = "Mengirim...";
             btn.disabled = true;
 
-            // URL-nya kita tambahin &jumlah= biar datanya keikut
             const urlKirim = `${URL_GOOGLE_SCRIPT}?action=addWish&nama=${encodeURIComponent(nama)}&hadir=${encodeURIComponent(hadir)}&jumlah=${encodeURIComponent(jumlah)}&ucapan=${encodeURIComponent(ucapan)}`;
 
             fetch(urlKirim)
