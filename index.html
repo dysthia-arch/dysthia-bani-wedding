@@ -1352,13 +1352,14 @@
         function aturJumlahTamu() {
             var status = document.getElementById('rsvp-hadir').value;
             var jumlahInput = document.getElementById('rsvp-jumlah');
+            var jumlahWrapper = document.getElementById('jumlah-wrapper'); // Ini bungkusan kotaknya
             
             if (status === 'Tidak Hadir') {
-                jumlahInput.style.display = 'none'; // Sembunyiin kotak jumlahnya
-                jumlahInput.value = '0'; // Otomatis jadi 0 orang
+                jumlahWrapper.style.display = 'none'; // Sembunyiin bungkusannya 100% dari layar!
+                jumlahInput.value = '0'; // Set angka jadi 0 secara gaib di belakang layar
             } else {
-                jumlahInput.style.display = 'block'; // Munculin lagi kotaknya
-                jumlahInput.value = '1'; // Balik ke default 1 orang
+                jumlahWrapper.style.display = 'block'; // Munculin lagi kotaknya kalau jadi hadir
+                jumlahInput.value = '1'; // Balikin default ke 1 orang
             }
         }
 
