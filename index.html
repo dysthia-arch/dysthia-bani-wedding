@@ -1066,6 +1066,15 @@
                         <option value="Hadir">Ya, Saya akan Hadir</option>
                         <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
                     </select>
+                    <!-- Tambahan Dropdown Jumlah Orang -->
+                    <select id="rsvp-jumlah">
+                        <option value="1">1 Orang</option>
+                        <option value="2">2 Orang</option>
+                        <option value="3">3 Orang</option>
+                        <option value="4">4 Orang</option>
+                        
+                    </select>
+
                     <textarea id="rsvp-ucapan" rows="4" placeholder="Tulis ucapan dan doa..." required></textarea>
                     <button class="btn-kirim" id="btn-submit-rsvp" onclick="kirimRSVP()">Kirim Konfirmasi</button>
                 </div>
@@ -1339,11 +1348,26 @@
                 }
             }
         }
+       
+        // --- FUNGSI ATUR JUMLAH TAMU ---
+        function aturJumlahTamu() {
+            const status = document.getElementById('rsvp-hadir').value;
+            const jumlahInput = document.getElementById('rsvp-jumlah');
+            
+            if (status === 'Tidak Hadir') {
+                jumlahInput.style.display = 'none'; // Sembunyiin kalau nggak hadir
+                jumlahInput.value = '0'; // Set nilainya jadi 0
+            } else {
+                jumlahInput.style.display = 'block'; // Munculin kalau hadir
+                jumlahInput.value = '1'; // Default balik ke 1
+            }
+        }
 
         // --- SISTEM KIRIM RSVP OTOMATIS KE GOOGLE SHEETS ---
         function kirimRSVP() {
             const nama = document.getElementById('rsvp-nama').value;
             const hadir = document.getElementById('rsvp-hadir').value;
+            const jumlah = document.getElementById('rsvp-jumlah').value; // Ini tambahan buat nangkep jumlah orang
             const ucapan = document.getElementById('rsvp-ucapan').value;
             const btn = document.getElementById('btn-submit-rsvp');
             
@@ -1352,7 +1376,8 @@
             btn.innerText = "Mengirim...";
             btn.disabled = true;
 
-            const urlKirim = `${URL_GOOGLE_SCRIPT}?action=addWish&nama=${encodeURIComponent(nama)}&hadir=${encodeURIComponent(hadir)}&ucapan=${encodeURIComponent(ucapan)}`;
+            // URL-nya kita tambahin &jumlah= biar datanya keikut
+            const urlKirim = `${URL_GOOGLE_SCRIPT}?action=addWish&nama=${encodeURIComponent(nama)}&hadir=${encodeURIComponent(hadir)}&jumlah=${encodeURIComponent(jumlah)}&ucapan=${encodeURIComponent(ucapan)}`;
 
             fetch(urlKirim)
                 .then(res => res.json())
