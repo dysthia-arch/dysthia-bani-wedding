@@ -1072,6 +1072,7 @@
                         <option value="2">2 Orang</option>
                         <option value="3">3 Orang</option>
                         <option value="4">4 Orang</option>
+                        <option value="0" style="display:none;">0 Orang</option> <!-- Ini pancingan buat sistem -->
                         
                     </select>
 
@@ -1351,15 +1352,15 @@
        
         // --- FUNGSI ATUR JUMLAH TAMU ---
         function aturJumlahTamu() {
-            const status = document.getElementById('rsvp-hadir').value;
-            const jumlahInput = document.getElementById('rsvp-jumlah');
+            var status = document.getElementById('rsvp-hadir').value;
+            var jumlahInput = document.getElementById('rsvp-jumlah');
             
             if (status === 'Tidak Hadir') {
-                jumlahInput.style.display = 'none'; // Sembunyiin kalau nggak hadir
-                jumlahInput.value = '0'; // Set nilainya jadi 0
+                jumlahInput.style.display = 'none'; // Sembunyiin kotak jumlahnya
+                jumlahInput.value = '0'; // Otomatis jadi 0 orang
             } else {
-                jumlahInput.style.display = 'block'; // Munculin kalau hadir
-                jumlahInput.value = '1'; // Default balik ke 1
+                jumlahInput.style.display = 'block'; // Munculin lagi kotaknya
+                jumlahInput.value = '1'; // Balik ke default 1 orang
             }
         }
 
