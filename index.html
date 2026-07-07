@@ -1089,17 +1089,6 @@
                     <!-- 5. Tombol Kirim -->
                     <button class="btn-kirim" id="btn-submit-rsvp" onclick="kirimRSVP()">Kirim Konfirmasi</button>
                 </div>
-
-                <div class="counter-wrapper" style="display: flex; gap: 10px; margin-top: 25px; margin-bottom: 20px;" data-aos="fade-up">
-                    <div style="flex: 1; background: #e2f5e3; padding: 15px; border-radius: 8px; border: 1px solid #27ae60;">
-                        <div style="font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: #27ae60; font-weight: bold;">HADIR</div>
-                        <div id="jumlah-hadir" style="font-family: 'Cinzel', serif; font-size: 1.5rem; color: #27ae60;">0</div>
-                    </div>
-                    <div style="flex: 1; background: #fce4e4; padding: 15px; border-radius: 8px; border: 1px solid #c0392b;">
-                        <div style="font-family: 'Poppins', sans-serif; font-size: 0.7rem; color: #c0392b; font-weight: bold;">TIDAK HADIR</div>
-                        <div id="jumlah-tidak-hadir" style="font-family: 'Cinzel', serif; font-size: 1.5rem; color: #c0392b;">0</div>
-                    </div>
-                </div>
                 
                 <div id="wishes-display">
                 </div>
@@ -1276,8 +1265,6 @@
 
         function loadWishes() {
             const displayArea = document.getElementById('wishes-display');
-            const spanHadir = document.getElementById('jumlah-hadir');
-            const spanTidak = document.getElementById('jumlah-tidak-hadir');
 
             fetch(`${URL_GOOGLE_SCRIPT}?action=getWishes`)
                 .then(res => res.json())
@@ -1285,19 +1272,12 @@
                     if (data && data.length > 0) {
                         displayArea.style.display = 'block';
 
-                        let totalHadir = data.filter(item => item.hadir === 'Hadir').length;
-                        let totalTidak = data.filter(item => item.hadir === 'Tidak Hadir').length;
-                        
-                        spanHadir.innerText = totalHadir;
-                        spanTidak.innerText = totalTidak;
-
                         allWishes = data.reverse(); // Data terbaru di atas
                         renderWishes(1); // Load halaman pertama
                     }
                 })
                 .catch(err => console.log("Gagal memuat mading:", err));
         }
-
         function renderWishes(page) {
             currentPage = page;
             const displayArea = document.getElementById('wishes-display');
@@ -1318,16 +1298,16 @@
             const wishesToShow = allWishes.slice(startIndex, endIndex);
 
             wishesToShow.forEach(wish => {
-                // --- Bikin Icon Ceklis & Silang mirip Screenshot ---
+                // --- Kodingan Logika Ikon Centang & Silang Balik Lagi ---
                 const isHadir = wish.hadir === 'Hadir';
                 const svgIcon = isHadir 
                     ? `<svg viewBox="0 0 24 24" fill="#27ae60" width="16" height="16"><path d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-13 5l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>`
                     : `<svg viewBox="0 0 24 24" fill="#e74c3c" width="16" height="16"><path d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-7.7-3.3l1.4 1.4-3.3 3.3 3.3 3.3-1.4 1.4-3.3-3.3-3.3 3.3-1.4-1.4 3.3-3.3-3.3-3.3 1.4-1.4 3.3 3.3 3.3-3.3z"/></svg>`;
 
-                // --- Ambil jam dari database (kalau gak ada, muncul tulisan 'Baru Saja') ---
+                // --- Ambil jam dari database ---
                 const waktuUcapan = wish.timestamp || wish.waktu || "Baru saja";
 
-                // --- Struktur HTML per Ucapan ---
+                // --- Struktur HTML per Ucapan (Ikon dipasang lagi di sini) ---
                 displayArea.innerHTML += `
                     <div class="wish-item">
                         <div class="wish-avatar">
@@ -1336,15 +1316,13 @@
                         <div class="wish-content">
                             <div class="wish-name-row">
                                 <span class="wish-name">${wish.nama}</span>
-                                <span class="wish-icon" title="${wish.hadir}">${svgIcon}</span>
-                            </div>
+                                <span class="wish-icon" title="${wish.hadir}">${svgIcon}</span> </div>
                             <div class="wish-time">${waktuUcapan}</div>
                             <div class="wish-text">${wish.ucapan}</div>
                         </div>
                     </div>
                 `;
             });
-
             // Bikin tombol angka halamannya
             const totalPages = Math.ceil(allWishes.length / wishesPerPage);
             if (totalPages > 1) {
