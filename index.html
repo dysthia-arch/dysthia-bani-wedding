@@ -1072,11 +1072,15 @@
 
                     <!-- Dropdown Jumlah Orang -->
                     <div id="jumlah-wrapper" style="width: 100%;">
-                        <select id="rsvp-jumlah" style="width: 100%;">
+                        <select id="rsvp-jumlah" style="width: 100%;" onchange="cekLebihDariDua()">
                             <option value="1">1 Orang</option>
                             <option value="2">2 Orang</option>
-                            <option value="3">lebih dari 2 Orang</option>
+                            <option value="custom">Lebih dari 2 Orang</option>
                         </select>
+                    </div>
+
+                    <div id="custom-jumlah-wrapper" style="width: 100%; display: none;">
+                        <input type="number" id="rsvp-jumlah-custom" placeholder="Masukkan jumlah orang (Misal: 4)" min="3">
                     </div>
 
                     <!-- 4. Input Ucapan -->
@@ -1360,14 +1364,34 @@
         function aturJumlahTamu() {
             var status = document.getElementById('rsvp-hadir').value;
             var jumlahInput = document.getElementById('rsvp-jumlah');
-            var jumlahWrapper = document.getElementById('jumlah-wrapper'); // Ini bungkusan kotaknya
+            var jumlahWrapper = document.getElementById('jumlah-wrapper'); 
+            var customWrapper = document.getElementById('custom-wrapper') || document.getElementById('custom-jumlah-wrapper');
             
             if (status === 'Tidak Hadir') {
-                jumlahWrapper.style.display = 'none'; // Sembunyiin bungkusannya 100% dari layar!
-                jumlahInput.value = '0'; // Set angka jadi 0 secara gaib di belakang layar
+                jumlahWrapper.style.display = 'none'; // Sembunyiin dropdown
+                customWrapper.style.display = 'none'; // Sembunyiin kotak ketik manual
+                jumlahInput.value = '0'; 
             } else {
-                jumlahWrapper.style.display = 'block'; // Munculin lagi kotaknya kalau jadi hadir
-                jumlahInput.value = '1'; // Balikin default ke 1 orang
+                jumlahWrapper.style.display = 'block'; // Munculin dropdown lagi
+                jumlahInput.value = '1'; 
+                cekLebihDariDua(); // Cek ulang apakah status dropdown-nya lagi di posisi 'custom' atau enggak
+            }
+        }
+
+        // --- FUNGSI DETEKSI PILIHAN LEBIH DARI 2 ORANG ---
+        function cekLebihDariDua() {
+            var pilihan = document.getElementById('rsvp-jumlah').value;
+            var customWrapper = document.getElementById('custom-jumlah-wrapper');
+            var customInput = document.getElementById('rsvp-jumlah-custom');
+
+            if (pilihan === 'custom') {
+                customWrapper.style.display = 'block'; // Munculin kotak ketik angka
+                customInput.required = true;
+                customInput.value = '3'; // Default angka mulai dari 3
+            } else {
+                customWrapper.style.display = 'none'; // Sembunyiin lagi kalau milih 1 atau 2
+                customInput.required = false;
+                customInput.value = '';
             }
         }
 
@@ -1375,13 +1399,17 @@
         function kirimRSVP() {
             const nama = document.getElementById('rsvp-nama').value;
             const hadir = document.getElementById('rsvp-hadir').value;
-            let jumlah = document.getElementById('rsvp-jumlah').value; // Pakai 'let' biar angkanya bisa kita manipulasi
+            let jumlah = document.getElementById('rsvp-jumlah').value; 
+            const jumlahCustom = document.getElementById('rsvp-jumlah-custom').value;
             const ucapan = document.getElementById('rsvp-ucapan').value;
             const btn = document.getElementById('btn-submit-rsvp');
             
-            // JALUR BELAKANG: Paksa jumlah jadi 0 kalau dia gak hadir
+            // Logika penentuan angka yang dikirim ke Google Sheets
             if (hadir === 'Tidak Hadir') {
                 jumlah = '0';
+            } else if (jumlah === 'custom') {
+                // Kalau pilih lebih dari 2 orang, ambil angka dari kotak ketikan tamu
+                jumlah = jumlahCustom ? jumlahCustom : '3'; 
             }
 
             if(!nama || !ucapan) { alert("Mohon lengkapi nama dan ucapan Anda."); return; }
