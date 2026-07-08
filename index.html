@@ -1377,13 +1377,14 @@
         function kirimRSVP() {
             const nama = document.getElementById('rsvp-nama').value;
             const hadir = document.getElementById('rsvp-hadir').value;
-            let jumlah = document.getElementById('rsvp-jumlah').value; 
+            let jumlah = document.getElementById('rsvp-jumlah').value;
             const jumlahCustom = document.getElementById('rsvp-jumlah-custom').value;
-            const ucapan = document.getElementById('rsvp-ucapan').value;
             const btn = document.getElementById('btn-submit-rsvp');
+            
             let ucapan = document.getElementById('rsvp-ucapan').value;
-
+            
             if (ucapan === "") { ucapan = "Mengkonfirmasi Kehadiran"; } // Kalau dikosongin, otomatis muncul teks ini
+
             // Logika penentuan angka yang dikirim ke Google Sheets
             if (hadir === 'Tidak Hadir') {
                 jumlah = '0';
