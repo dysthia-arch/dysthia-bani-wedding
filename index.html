@@ -1116,100 +1116,101 @@
 
             <div class="gift-rsvp-content">
                 
+                <!-- ============================================== -->
+                <!-- BUNGKUSAN GELAP: KHUSUS WEDDING GIFT AJA -->
+                <!-- ============================================== -->
                 <div style="background: rgba(11, 19, 37, 0.85); padding: 100px 30px 60px 30px;">
                     <h2 class="judul-section" data-aos="fade-up">Wedding Gift</h2>
                     <p style="font-size: 1.05rem; margin-bottom: 30px; line-height: 1.6; font-weight: 600;" data-aos="fade-up">
-                        Doa restu Anda merupakan karunia yang sangat berarti bagi kami...
+                        Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda bermaksud memberikan tanda kasih, dapat melalui fitur di bawah ini:
                     </p>
 
-                    </div> <div style="padding: 60px 30px 100px 30px; background: transparent;">
+                    <!-- KARTU ATM 1: Dysthia -->
+                    <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000">
+                        <div class="atm-header">
+                            <svg class="atm-chip" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="4" width="20" height="16" rx="4" fill="#d4af37"/>
+                                <path d="M2 10H8V14H2M16 10H22V14H16M8 4V10H16V4M8 14V20H16V14" stroke="#0b1325" stroke-width="1.5"/>
+                            </svg>
+                            <img src="logo-bca.png" alt="Logo BCA" class="atm-logo-bank">
+                        </div>
+                        <p class="atm-norek" id="rek1">5940386481</p>
+                        <p class="atm-nama">Dysthia Dwi Shafira</p>
+                        <button class="btn-copy-atm" onclick="salinTeks('rek1')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+
+                    <!-- KARTU ATM 2: Bani -->
+                    <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                        <div class="atm-header">
+                            <svg class="atm-chip" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="4" width="20" height="16" rx="4" fill="#d4af37"/>
+                                <path d="M2 10H8V14H2M16 10H22V14H16M8 4V10H16V4M8 14V20H16V14" stroke="#0b1325" stroke-width="1.5"/>
+                            </svg>
+                            <img src="logo-bca.png" alt="Logo BCA" class="atm-logo-bank">
+                        </div>
+                        <p class="atm-norek" id="rek2">6040535606</p>
+                        <p class="atm-nama">Bani Adil Insan</p>
+                        <button class="btn-copy-atm" onclick="salinTeks('rek2')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+                    
+                    <!-- KOTAK ALAMAT -->
+                    <div class="rekening-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
+                        <p class="bank-nama">Kirim Hadiah</p>
+                        <p style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 10px; line-height: 1.6;" id="alamat1">Perumahan Simprug di Poris Blok D7 no.48 RT 04 RW 06 kec. Batuceper kel.Poris Jaya, Kota Tangerang, Banten</p>
+                        <button class="btn-copy" onclick="salinTeks('alamat1')">Salin Alamat</button>
+                    </div>
+
+                </div> <!-- INI PENUTUP BUNGKUSAN GELAPNYA -->
+
+
+                <!-- ============================================== -->
+                <!-- BUNGKUSAN BENING: KHUSUS WISHES & RSVP -->
+                <!-- ============================================== -->
+                <div style="padding: 60px 30px 100px 30px; background: transparent;">
                     
                     <h2 class="judul-section" data-aos="fade-up">Wishes & RSVP</h2>
                     <p style="font-size: 1rem; margin-bottom: 10px;" data-aos="fade-up">Berikan ucapan serta konfirmasi kehadiran Anda.</p>
 
+                    <div class="rsvp-form" data-aos="fade-up" data-aos-duration="1000">
+                        <!-- 1. Input Nama Lengkap -->
+                        <input type="text" id="rsvp-nama" placeholder="Nama Lengkap" required>
+                        
+                        <!-- 2. Dropdown Kehadiran -->
+                        <select id="rsvp-hadir" onchange="aturJumlahTamu()">
+                            <option value="Hadir">Ya, Saya akan Hadir</option>
+                            <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
+                        </select>
+
+                        <!-- 3. Dropdown Jumlah Orang -->
+                        <div id="jumlah-wrapper" style="width: 100%;">
+                            <select id="rsvp-jumlah" style="width: 100%;" onchange="cekLebihDariDua()">
+                                <option value="1">1 Orang</option>
+                                <option value="2">2 Orang</option>
+                                <option value="custom">Lebih dari 2 Orang</option>
+                            </select>
+                        </div>
+
+                        <!-- 4. Kotak Ketik Manual -->
+                        <div id="custom-jumlah-wrapper" style="width: 100%; display: none;">
+                            <input type="number" id="rsvp-jumlah-custom" placeholder="Masukkan jumlah orang (Misal: 4)" min="3">
+                        </div>
+
+                        <!-- 5. Input Ucapan -->
+                        <textarea id="rsvp-ucapan" rows="4" placeholder="Tulis ucapan dan doa (Opsional)..."></textarea>
+                        
+                        <!-- 6. Tombol Kirim -->
+                        <button class="btn-kirim" id="btn-submit-rsvp" onclick="kirimRSVP()">Kirim Konfirmasi</button>
+                    </div>
+                    
                     <div id="wishes-display"></div>
 
-                </div> </div>
-        </section>
-
-                <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000">
-                    <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000">
-    <div class="atm-header">
-        <svg class="atm-chip" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="4" width="20" height="16" rx="4" fill="#d4af37"/>
-            <path d="M2 10H8V14H2M16 10H22V14H16M8 4V10H16V4M8 14V20H16V14" stroke="#0b1325" stroke-width="1.5"/>
-        </svg>
-        
-        <img src="logo-bca.png" alt="Logo BCA" class="atm-logo-bank">
-    </div>
-    <p class="atm-norek" id="rek1">5940386481</p>
-    <p class="atm-nama">Dysthia Dwi Shafira</p>
-    <button class="btn-copy-atm" onclick="salinTeks('rek1')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-        Copy
-    </button>
-</div>
-
-                <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000">
-    <div class="atm-header">
-        <svg class="atm-chip" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="4" width="20" height="16" rx="4" fill="#d4af37"/>
-            <path d="M2 10H8V14H2M16 10H22V14H16M8 4V10H16V4M8 14V20H16V14" stroke="#0b1325" stroke-width="1.5"/>
-        </svg>
-        
-        <img src="logo-bca.png" alt="Logo BCA" class="atm-logo-bank">
-    </div>
-    <p class="atm-norek" id="rek1">6040535606</p>
-    <p class="atm-nama">Bani Adil Insan</p>
-    <button class="btn-copy-atm" onclick="salinTeks('rek1')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-        Copy
-    </button>
-</div>
-                
-                <div class="rekening-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
-                    <p class="bank-nama">Kirim Hadiah</p>
-                    <p style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 10px; line-height: 1.6;" id="alamat1">Perumahan Simprug di Poris Blok D7 no.48 RT 04 RW 06 kec. Batuceper kel.Poris Jaya, Kota Tangerang, Banten</p>
-                    <button class="btn-copy" onclick="salinTeks('alamat1')">Salin Alamat</button>
-                </div>
-
-               <div style="margin-top: 80px;"></div>
-
-                <h2 class="judul-section" data-aos="fade-up">Wishes & RSVP</h2>
-                <p style="font-size: 1rem; margin-bottom: 10px;" data-aos="fade-up">Berikan ucapan serta konfirmasi kehadiran Anda.</p>
-
-                <div class="rsvp-form" data-aos="fade-up" data-aos-duration="1000">
-                    <!-- 1. Input Nama Lengkap -->
-                    <input type="text" id="rsvp-nama" placeholder="Nama Lengkap" required>
-                    
-                    <!-- 2. Dropdown Kehadiran -->
-                    <select id="rsvp-hadir" onchange="aturJumlahTamu()">
-                        <option value="Hadir">Ya, Saya akan Hadir</option>
-                        <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
-                    </select>
-
-                    <!-- Dropdown Jumlah Orang -->
-                    <div id="jumlah-wrapper" style="width: 100%;">
-                        <select id="rsvp-jumlah" style="width: 100%;" onchange="cekLebihDariDua()">
-                            <option value="1">1 Orang</option>
-                            <option value="2">2 Orang</option>
-                            <option value="custom">Lebih dari 2 Orang</option>
-                        </select>
-                    </div>
-
-                    <div id="custom-jumlah-wrapper" style="width: 100%; display: none;">
-                        <input type="number" id="rsvp-jumlah-custom" placeholder="Masukkan jumlah orang (Misal: 4)" min="3">
-                    </div>
-
-                    <!-- 4. Input Ucapan -->
-                   <textarea id="rsvp-ucapan" rows="4" placeholder="Tulis ucapan dan doa (Opsional)..."></textarea>
-                    
-                    <!-- 5. Tombol Kirim -->
-                    <button class="btn-kirim" id="btn-submit-rsvp" onclick="kirimRSVP()">Kirim Konfirmasi</button>
-                </div>
-                
-                <div id="wishes-display">
-                </div>
+                </div> <!-- INI PENUTUP BUNGKUSAN BENINGNYA -->
 
             </div>
         </section>
