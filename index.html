@@ -575,7 +575,91 @@
         .bank-norek { font-size: 1.4rem; letter-spacing: 2px; color: var(--warna-bg); margin-bottom: 5px; font-weight: bold; }
         .btn-copy { padding: 8px 15px; background: var(--warna-bg); color: white; border: none; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 0.7rem; cursor: pointer; margin-top: 10px; transition: 0.2s; border: 1px solid var(--warna-bg); }
         .btn-copy:hover { background: transparent; color: var(--warna-bg); }
-
+        .card-atm {
+            position: relative;
+            background: linear-gradient(135deg, var(--warna-kertas) 0%, var(--warna-bg) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 15px;
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            color: var(--warna-teks);
+            text-align: left;
+            overflow: hidden;
+            width: 100%;
+        }
+        /* Efek cahaya/pattern di pojok kanan atas biar mirip kartu asli */
+        .card-atm::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .atm-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            position: relative; z-index: 2;
+        }
+        .atm-chip {
+            width: 40px; height: auto; opacity: 0.9;
+        }
+        .atm-bank {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--warna-aksen);
+        }
+        .atm-logo-bank {
+            height: 25px; /* Atur tinggi logo biar pas sama tinggi chip-nya */
+            width: auto;  /* Lebar otomatis ngikutin proporsi gambar */
+            object-fit: contain;
+            opacity: 0.9; /* Biar ngeblend elegan sama kartunya */
+        }
+        .atm-norek {
+            font-family: 'Courier New', Courier, monospace; /* Font ala nomor kartu ATM */
+            font-size: 1.5rem;
+            letter-spacing: 4px;
+            color: #ffffff;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            position: relative; z-index: 2;
+        }
+        .atm-nama {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: rgba(234, 234, 234, 0.7);
+            letter-spacing: 1px;
+            position: relative; z-index: 2;
+        }
+        .btn-copy-atm {
+            position: absolute;
+            bottom: 20px; right: 20px;
+            padding: 6px 12px;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--warna-aksen);
+            border: 1px solid var(--warna-aksen);
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 3;
+            font-weight: 600;
+        }
+        .btn-copy-atm:hover {
+            background: var(--warna-aksen);
+            color: var(--warna-bg);
+        }
         .rsvp-form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; text-align: left; }
         .rsvp-form input, .rsvp-form select, .rsvp-form textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 0.9rem; background: rgba(255,255,255,0.95); color: var(--warna-teks-gelap); }
         .btn-kirim { padding: 12px; background: var(--warna-aksen); color: white; border: none; border-radius: 5px; font-family: 'Poppins', sans-serif; font-weight: bold; cursor: pointer; transition: 0.3s; }
@@ -1035,19 +1119,40 @@
                     Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda bermaksud memberikan tanda kasih, dapat melalui fitur di bawah ini:
                 </p>
 
-                <div class="rekening-box" data-aos="zoom-in" data-aos-duration="1000">
-                    <p class="bank-nama">BCA</p>
-                    <p class="bank-norek" id="rek1">5940386481</p>
-                    <p style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 10px;">a.n Dysthia Dwi Shafira</p>
-                    <button class="btn-copy" onclick="salinTeks('rek1')">Salin No. Rekening</button>
-                </div>
+                <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000">
+                    <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000">
+    <div class="atm-header">
+        <svg class="atm-chip" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="4" width="20" height="16" rx="4" fill="#d4af37"/>
+            <path d="M2 10H8V14H2M16 10H22V14H16M8 4V10H16V4M8 14V20H16V14" stroke="#0b1325" stroke-width="1.5"/>
+        </svg>
+        
+        <img src="logo-bca.png" alt="Logo BCA" class="atm-logo-bank">
+    </div>
+    <p class="atm-norek" id="rek1">5940386481</p>
+    <p class="atm-nama">Dysthia Dwi Shafira</p>
+    <button class="btn-copy-atm" onclick="salinTeks('rek1')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+        Copy
+    </button>
+</div>
 
-                <div class="rekening-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
-                    <p class="bank-nama">BCA</p>
-                    <p class="bank-norek" id="rek2">6040535606</p>
-                    <p style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 10px;">a.n Bani Adil Insan</p>
-                    <button class="btn-copy" onclick="salinTeks('rek2')">Salin No. Rekening</button>
-                </div>
+                <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000">
+    <div class="atm-header">
+        <svg class="atm-chip" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="4" width="20" height="16" rx="4" fill="#d4af37"/>
+            <path d="M2 10H8V14H2M16 10H22V14H16M8 4V10H16V4M8 14V20H16V14" stroke="#0b1325" stroke-width="1.5"/>
+        </svg>
+        
+        <img src="logo-bca.png" alt="Logo BCA" class="atm-logo-bank">
+    </div>
+    <p class="atm-norek" id="rek1">6040535606</p>
+    <p class="atm-nama">Bani Adil Insan</p>
+    <button class="btn-copy-atm" onclick="salinTeks('rek1')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+        Copy
+    </button>
+</div>
                 
                 <div class="rekening-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
                     <p class="bank-nama">Kirim Hadiah</p>
