@@ -1084,7 +1084,7 @@
                     </div>
 
                     <!-- 4. Input Ucapan -->
-                    <textarea id="rsvp-ucapan" rows="4" placeholder="Tulis ucapan dan doa..." required></textarea>
+                   <textarea id="rsvp-ucapan" rows="4" placeholder="Tulis ucapan dan doa (Opsional)..."></textarea>
                     
                     <!-- 5. Tombol Kirim -->
                     <button class="btn-kirim" id="btn-submit-rsvp" onclick="kirimRSVP()">Kirim Konfirmasi</button>
@@ -1381,7 +1381,9 @@
             const jumlahCustom = document.getElementById('rsvp-jumlah-custom').value;
             const ucapan = document.getElementById('rsvp-ucapan').value;
             const btn = document.getElementById('btn-submit-rsvp');
-            
+            let ucapan = document.getElementById('rsvp-ucapan').value;
+
+            if (ucapan === "") { ucapan = "Mengkonfirmasi Kehadiran"; } // Kalau dikosongin, otomatis muncul teks ini
             // Logika penentuan angka yang dikirim ke Google Sheets
             if (hadir === 'Tidak Hadir') {
                 jumlah = '0';
@@ -1390,7 +1392,7 @@
                 jumlah = jumlahCustom ? jumlahCustom : '3'; 
             }
 
-            if(!nama || !ucapan) { alert("Mohon lengkapi nama dan ucapan Anda."); return; }
+            if(!nama) { alert("Mohon isi Nama Lengkap Anda."); return; }
 
             btn.innerText = "Mengirim...";
             btn.disabled = true;
