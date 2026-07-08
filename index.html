@@ -1270,10 +1270,17 @@
                 .then(res => res.json())
                 .then(data => {
                     if (data && data.length > 0) {
-                        displayArea.style.display = 'block';
-
-                        allWishes = data.reverse(); // Data terbaru di atas
-                        renderWishes(1); // Load halaman pertama
+                        
+                        // JALUR FILTER: Pisahin tamu yang nulis ucapan sama yang nggak
+                        allWishes = data.filter(item => item.ucapan.trim() !== "").reverse(); 
+                        
+                        // Kalau ternyata setelah disaring ada isinya, baru tampilin madingnya
+                        if (allWishes.length > 0) {
+                            displayArea.style.display = 'block';
+                            renderWishes(1); // Load halaman pertama
+                        } else {
+                            displayArea.style.display = 'none'; // Sembunyiin kalau kosong
+                        }
                     }
                 })
                 .catch(err => console.log("Gagal memuat mading:", err));
@@ -1383,7 +1390,6 @@
             
             let ucapan = document.getElementById('rsvp-ucapan').value;
             
-            if (ucapan === "") { ucapan = "Mengkonfirmasi Kehadiran"; } // Kalau dikosongin, otomatis muncul teks ini
 
             // Logika penentuan angka yang dikirim ke Google Sheets
             if (hadir === 'Tidak Hadir') {
