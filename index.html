@@ -564,10 +564,10 @@
             pointer-events: none;
         }
 
-        .gift-rsvp-content {
+       .gift-rsvp-content {
             position: relative; z-index: 2;
             width: 100%;
-            padding: 100px 30px; 
+            padding: 0; /* UBAH ANGKA DI SINI JADI 0 */
             background: transparent; 
         }
 
@@ -1114,11 +1114,26 @@
         <section id="gift-rsvp">
             <div class="parallax-bg-gift"></div>
 
+            <section id="gift-rsvp">
+            <div class="parallax-bg-gift"></div>
+
             <div class="gift-rsvp-content">
-                <h2 class="judul-section" data-aos="fade-up">Wedding Gift</h2>
-                <p style="font-size: 1.05rem; margin-bottom: 30px; line-height: 1.6; font-weight: 600;" data-aos="fade-up">
-                    Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda bermaksud memberikan tanda kasih, dapat melalui fitur di bawah ini:
-                </p>
+                
+                <div style="background: rgba(11, 19, 37, 0.85); padding: 100px 30px 60px 30px;">
+                    <h2 class="judul-section" data-aos="fade-up">Wedding Gift</h2>
+                    <p style="font-size: 1.05rem; margin-bottom: 30px; line-height: 1.6; font-weight: 600;" data-aos="fade-up">
+                        Doa restu Anda merupakan karunia yang sangat berarti bagi kami...
+                    </p>
+
+                    </div> <div style="padding: 60px 30px 100px 30px; background: transparent;">
+                    
+                    <h2 class="judul-section" data-aos="fade-up">Wishes & RSVP</h2>
+                    <p style="font-size: 1rem; margin-bottom: 10px;" data-aos="fade-up">Berikan ucapan serta konfirmasi kehadiran Anda.</p>
+
+                    <div id="wishes-display"></div>
+
+                </div> </div>
+        </section>
 
                 <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000">
