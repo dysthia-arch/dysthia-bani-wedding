@@ -537,6 +537,35 @@
         .bank-norek { font-size: 1.4rem; letter-spacing: 2px; color: var(--warna-bg); margin-bottom: 5px; font-weight: bold; }
         .btn-copy { padding: 8px 15px; background: var(--warna-bg); color: white; border: none; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 0.7rem; cursor: pointer; margin-top: 10px; transition: 0.2s; border: 1px solid var(--warna-bg); }
         .btn-copy:hover { background: transparent; color: var(--warna-bg); }
+        /* --- DESAIN TOMBOL BUKA KADO --- */
+        .btn-kado {
+            padding: 12px 28px;
+            background: rgba(212, 175, 55, 0.15); /* Warna gold transparan */
+            color: var(--warna-aksen);
+            border: 1px solid var(--warna-aksen);
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px auto 30px auto;
+        }
+        .btn-kado:hover {
+            background: var(--warna-aksen);
+            color: var(--warna-bg);
+        }
+        /* Biar halus pas kotak ATM-nya turun */
+        #area-kado {
+            animation: turunHalus 0.5s ease-out forwards;
+        }
+        @keyframes turunHalus {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .card-atm {
             position: relative;
             background: linear-gradient(135deg, var(--warna-kertas) 0%, var(--warna-bg) 100%);
@@ -1078,50 +1107,67 @@
             <div class="gift-rsvp-content">
                 
                 <h2 class="judul-section" data-aos="fade-up">Wedding Gift</h2>
-                <p style="font-size: 1.05rem; margin-bottom: 30px; line-height: 1.6; font-weight: 600;" data-aos="fade-up">
+                <p style="font-size: 1.05rem; margin-bottom: 20px; line-height: 1.6; font-weight: 600;" data-aos="fade-up">
                     Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Anda bermaksud memberikan tanda kasih, dapat melalui fitur di bawah ini:
                 </p>
 
-                <!-- KARTU ATM 1: Dysthia -->
-                <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000">
-                    <div class="atm-header">
-                        <svg class="atm-chip" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="2" y="4" width="20" height="16" rx="4" fill="#d4af37"/>
-                            <path d="M2 10H8V14H2M16 10H22V14H16M8 4V10H16V4M8 14V20H16V14" stroke="#0b1325" stroke-width="1.5"/>
-                        </svg>
-                        <img src="logo-bca.png" alt="Logo BCA" class="atm-logo-bank">
-                    </div>
-                    <p class="atm-norek" id="rek1">5940386481</p>
-                    <p class="atm-nama">Dysthia Dwi Shafira</p>
-                    <button class="btn-copy-atm" onclick="salinTeks('rek1')">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                        Copy
-                    </button>
-                </div>
+                <!-- TOMBOL BUKA KADO (Tampil di awal) -->
+                <button class="btn-kado" id="btn-tampil-kado" onclick="bukaKado()" data-aos="fade-up">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="8" width="18" height="14" rx="2" ry="2"></rect>
+                        <line x1="12" y1="8" x2="12" y2="22"></line>
+                        <path d="M19 8V5c0-1.1-.9-2-2-2H7c-1.1 0-2 .9-2 2v3"></path>
+                        <path d="M12 8L8 4"></path>
+                        <path d="M12 8l4-4"></path>
+                    </svg>
+                    Klik Disini
+                </button>
 
-                <!-- KARTU ATM 2: Bani -->
-                <div class="card-atm" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
-                    <div class="atm-header">
-                        <svg class="atm-chip" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="2" y="4" width="20" height="16" rx="4" fill="#d4af37"/>
-                            <path d="M2 10H8V14H2M16 10H22V14H16M8 4V10H16V4M8 14V20H16V14" stroke="#0b1325" stroke-width="1.5"/>
-                        </svg>
-                        <img src="logo-bca.png" alt="Logo BCA" class="atm-logo-bank">
+                <!-- WADAH KADO (Ngasih Kado Disembunyiin Dulu) -->
+                <div id="area-kado" style="display: none; width: 100%;">
+                    
+                    <!-- KARTU ATM 1: Dysthia -->
+                    <div class="card-atm">
+                        <div class="atm-header">
+                            <svg class="atm-chip" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="4" width="20" height="16" rx="4" fill="#d4af37"/>
+                                <path d="M2 10H8V14H2M16 10H22V14H16M8 4V10H16V4M8 14V20H16V14" stroke="#0b1325" stroke-width="1.5"/>
+                            </svg>
+                            <img src="logo-bca.png" alt="Logo BCA" class="atm-logo-bank">
+                        </div>
+                        <p class="atm-norek" id="rek1">5940386481</p>
+                        <p class="atm-nama">Dysthia Dwi Shafira</p>
+                        <button class="btn-copy-atm" onclick="salinTeks('rek1')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                            Copy
+                        </button>
                     </div>
-                    <p class="atm-norek" id="rek2">6040535606</p>
-                    <p class="atm-nama">Bani Adil Insan</p>
-                    <button class="btn-copy-atm" onclick="salinTeks('rek2')">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                        Copy
-                    </button>
-                </div>
-                
-                <!-- KOTAK ALAMAT -->
-                <div class="rekening-box" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
-                    <p class="bank-nama">Kirim Hadiah</p>
-                    <p style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 10px; line-height: 1.6;" id="alamat1">Perumahan Simprug di Poris Blok D7 no.48 RT 04 RW 06 kec. Batuceper kel.Poris Jaya, Kota Tangerang, Banten</p>
-                    <button class="btn-copy" onclick="salinTeks('alamat1')">Salin Alamat</button>
-                </div>
+
+                    <!-- KARTU ATM 2: Bani -->
+                    <div class="card-atm">
+                        <div class="atm-header">
+                            <svg class="atm-chip" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="4" width="20" height="16" rx="4" fill="#d4af37"/>
+                                <path d="M2 10H8V14H2M16 10H22V14H16M8 4V10H16V4M8 14V20H16V14" stroke="#0b1325" stroke-width="1.5"/>
+                            </svg>
+                            <img src="logo-bca.png" alt="Logo BCA" class="atm-logo-bank">
+                        </div>
+                        <p class="atm-norek" id="rek2">6040535606</p>
+                        <p class="atm-nama">Bani Adil Insan</p>
+                        <button class="btn-copy-atm" onclick="salinTeks('rek2')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+                    
+                    <!-- KOTAK ALAMAT -->
+                    <div class="rekening-box">
+                        <p class="bank-nama">Kirim Hadiah</p>
+                        <p style="font-family: 'Poppins', sans-serif; font-size: 0.9rem; margin-bottom: 10px; line-height: 1.6;" id="alamat1">Perumahan Simprug di Poris Blok D7 no.48 RT 04 RW 06 kec. Batuceper kel.Poris Jaya, Kota Tangerang, Banten</p>
+                        <button class="btn-copy" onclick="salinTeks('alamat1')">Salin Alamat</button>
+                    </div>
+
+                </div> <!-- PENUTUP WADAH KADO -->
 
                 <div style="margin-top: 80px;"></div>
                 
@@ -1567,6 +1613,22 @@
             const lightbox = document.getElementById('lightbox-modal');
             if (lightbox) {
                 lightbox.classList.remove('show');
+            }
+        }
+        // --- FUNGSI KLIK BUKA KADO ---
+        function bukaKado() {
+            var areaKado = document.getElementById('area-kado');
+            var btnKado = document.getElementById('btn-tampil-kado');
+            
+            if (areaKado.style.display === 'none') {
+                // Munculin kotaknya dan sembunyiin tombol kliknya
+                areaKado.style.display = 'block';
+                btnKado.style.display = 'none';
+                
+                // Refresh mesin animasi AOS biar kartunya gak macet
+                setTimeout(function() {
+                    AOS.refresh();
+                }, 100);
             }
         }
     </script>
